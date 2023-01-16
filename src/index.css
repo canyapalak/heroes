@@ -5,7 +5,7 @@ body {
   margin: 0px !important;
   background-image: url("./components/assets/shooting-stars.png");
   background-repeat: repeat;
-  font-family: 'Rajdhani';
+  font-family: 'Saira';
   font-weight: normal;
   font-style: normal;
 }
@@ -43,29 +43,33 @@ body {
   padding: 0px;
   width: 5rem;
   background-color: rgb(49, 11, 55);
-    height: 2.5rem;
-    border: 4px solid rgb(214, 126, 198);
-    border-radius: 7px;
-    font-size: x-large;
-    color: white;
-    margin-left: 0.5em;
+  height: 2.5rem;
+  border: 4px solid rgb(214, 126, 198);
+  border-radius: 7px;
+  font-size: x-large;
+  color: white;
+  margin-left: 0.5em;
+}
+
+#bar-and-button {
+  display: flex;
+  justify-content: center;
+  margin-top: -1rem;
 }
 
 /* Card Place */
 .heroes-container {
-display: flex;
-flex-wrap: wrap;
-justify-content:space-evenly;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content:space-evenly;
+  margin-top: 1rem;
+  margin-bottom: 1rem;
 }
 
-/* Card Styling */
-#hero-card {
-  margin: 1rem;
-  border: 5px solid rgb(230, 142, 55);
-}
-
+/* Footer */
 #footer {
-  background-color: rgb(214, 126, 198);
+  background: rgb(214, 126, 198);
+  background: linear-gradient(90deg, rgba(214, 126, 198, 1) 30%, rgba(225, 68, 197, 1) 63%);
   font-size: larger;
 }
 
@@ -73,13 +77,33 @@ justify-content:space-evenly;
   margin: 0px;
 }
 
-#testtest a {
+#footer-text a {
   color: rgb(245, 234, 14);
 }
 
-#card-name {
-font-size: x-large;
-display: flex;
-justify-content: center;
+#footer-flash {
+  width: 3rem;
+}
 
+/* Card Styling */
+#hero-card {
+  margin: 1rem;
+  border: 5px solid rgb(230, 142, 55);
+  background: rgb(119, 33, 134);
+  background: linear-gradient(90deg, rgba(119, 33, 134, 1) 30%, rgba(49, 11, 55, 1) 63%);
+}
+
+#card-name {
+  font-size: 170%;
+  display: flex;
+  justify-content: center;
+  color: rgb(255, 233, 251);
+}
+
+#card-img {
+  width: 100%;
+  height: 100%;
+  background: url("./components/assets/hero-placeholder.jpg") no-repeat scroll 0 0;
+  background-size: cover;
+  border-bottom: 5px solid rgb(230, 142, 55);
 }

@@ -7,6 +7,8 @@ import Navbar from "./components/Navbar";
 function App() {
   const [heroes, setHeroes] = useState([]);
 
+  // API KEY: 10159060549017724
+
   const fetchHeroes = async () => {
     const response = await fetch(
       "https://www.superheroapi.com/api.php/10159060549017724/search/super"
@@ -14,8 +16,6 @@ function App() {
     const result = await response.json();
     console.log("Async result: ", result);
     setHeroes(result.results);
-    // const heroOne = result;
-    // console.log("allHeroes :>> ", allHeroes);
   };
 
   useEffect(() => {
