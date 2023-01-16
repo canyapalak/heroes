@@ -1,42 +1,32 @@
 import React from "react";
-import { useState, useEffect, useCallback } from "react";
-import Navbar from "./components/Navbar";
+import { useState, useEffect } from "react";
+import Footer from "./components/Footer";
 import HeroCards from "./components/HeroCards";
+import Navbar from "./components/Navbar";
 
 function App() {
-  const fetchAllHeroes = async () => {
+  const [heroes, setHeroes] = useState([]);
+
+  const fetchHeroes = async () => {
     const response = await fetch(
-      "https://akabab.github.io/superhero-api/api/all.json"
+      "https://www.superheroapi.com/api.php/10159060549017724/search/super"
     );
     const result = await response.json();
-    // console.log("Async result: ", result);
-    const allHeroes = result;
-    console.log("allHeroes :>> ", allHeroes);
+    console.log("Async result: ", result);
+    setHeroes(result.results);
+    // const heroOne = result;
+    // console.log("allHeroes :>> ", allHeroes);
   };
 
-  fetchAllHeroes().catch((error) => console.log("Async error: ", error));
-
-  // const [heroes, setHeroes] = useState([]);
-  // const [searchQuery, setSearchQuery] = useState([]);
-
-  // const fetchAllHeroes = useCallback(async () => {
-  //   const data = await fetch(
-  //     "https://akabab.github.io/superhero-api/api/all.json"
-  //   )
-  //     .then((response) => response.json())
-  //     .catch((error) => console.log("Classic error: ", error));
-  //   console.log("data", data);
-  //   setHeroes(data);
-  // }, [searchQuery]);
-
-  // useEffect(() => {
-  //   fetchAllHeroes();
-  // }, [fetchAllHeroes]);
+  useEffect(() => {
+    fetchHeroes().catch((error) => console.log("Async error: ", error));
+  }, []);
 
   return (
     <div className="home">
-      <Navbar />;
-      <HeroCards allHeroes={allHeroes} />;
+      <Navbar heroes={heroes}></Navbar>
+      <HeroCards heroes={heroes}></HeroCards>
+      <Footer />
     </div>
   );
 }
