@@ -24,17 +24,23 @@ function BurgerMenu() {
     --> */}
         <ul id="menu">
           <div className="home-icon-and-link">
-            <i class="bi bi-house-door-fill" id="home-icon"></i>
+            <i className="bi bi-house-door-fill" id="home-icon"></i>
             <a href="http://www.google.com">
               <li>Home</li>
             </a>
           </div>
-          <a href="http://www.google.com">
-            <li>Log In</li>
-          </a>
-          <a href="http://www.google.com">
-            <li>Register</li>
-          </a>
+          <div className="login-icon-and-link">
+            <i className="bi bi-door-open-fill" id="login-icon"></i>
+            <a href="http://www.google.com">
+              <li>Log In</li>
+            </a>
+          </div>
+          <div className="register-icon-and-link">
+            <i className="bi bi-person-plus-fill" id="register-icon"></i>
+            <a href="http://www.google.com">
+              <li>Register</li>
+            </a>
+          </div>
         </ul>
       </div>
     </nav>

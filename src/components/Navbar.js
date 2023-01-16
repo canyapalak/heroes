@@ -1,6 +1,5 @@
 import React from "react";
 import HeroesLogo from "./assets/heroes-noback.png";
-import SearchBar from "./SearchBar";
 
 function Navbar({ heroes }) {
   return (

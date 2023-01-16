@@ -12,7 +12,7 @@ function SearchBar() {
         aria-label="Search"
       />
       <Button variant="outline-success" className="search-button">
-        Go
+        Go!
       </Button>
     </Form>
   );

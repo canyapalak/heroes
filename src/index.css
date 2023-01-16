@@ -1,17 +1,48 @@
 
-
 /* Body */
 body {
   margin: 0px !important;
   background-image: url("./components/assets/shooting-stars.png");
   background-repeat: repeat;
-  font-family: 'Saira';
+  font-family: 'HortaRegular';
+  font-size: larger;
+  letter-spacing: 1px;
   font-weight: normal;
   font-style: normal;
+  -webkit-animation: backgroundScroll 15s linear 1;
+  -webkit-animation-fill-mode: both;
+  animation: backgroundScroll linear 15s 1;
+  animation-fill-mode: both;
+  animation-iteration-count: infinite;
+  -webkit-animation-iteration-count: infinite;
+  animation-direction: alternate-reverse;
+  -webkit-animation-direction: alternate-reverse;
+}
+
+/* Sliding Background */
+@keyframes backgroundScroll {
+  from {
+    background-position: 0 0;
+  }
+
+  to {
+    background-position: -200px 0px;
+  }
+}
+
+@-webkit-keyframes backgroundScroll {
+  from {
+    background-position: 0 0;
+  }
+
+  to {
+    background-position: -200px 0px;
+  }
 }
 
 /* Navigation Bar */
 .navbar {
+  margin-top: -2rem;
   display: flex;
   justify-content: space-between;
   flex-wrap: wrap;
@@ -35,14 +66,33 @@ body {
   height: 2.5rem;
   border: 4px solid rgb(214, 126, 198);
   border-radius: 7px;
-  font-size:130%;
+  font-size:x-large;
+  letter-spacing: 1px;
   padding: 8px;
+}
+
+.input-bar:focus {
+  color: rgb(0, 0, 0);
+  border: 4px solid green;
 }
 
 .search-button {
   padding: 0px;
   width: 5rem;
   background-color: rgb(49, 11, 55);
+  height: 2.5rem;
+  border: 4px solid rgb(214, 126, 198);
+  border-radius: 7px;
+  font-size: x-large;
+  letter-spacing: 3px;
+  color: white;
+  margin-left: 0.5em;
+}
+
+.search-button:hover {
+  padding: 0px;
+  width: 5rem;
+  background-color: green;
   height: 2.5rem;
   border: 4px solid rgb(214, 126, 198);
   border-radius: 7px;
@@ -71,6 +121,8 @@ body {
   background: rgb(214, 126, 198);
   background: linear-gradient(90deg, rgba(214, 126, 198, 1) 30%, rgba(225, 68, 197, 1) 63%);
   font-size: larger;
+  display:block;
+  position:sticky;
 }
 
 #footer p {
@@ -86,24 +138,205 @@ body {
 }
 
 /* Card Styling */
-#hero-card {
+.hero-card {
   margin: 1rem;
   border: 5px solid rgb(230, 142, 55);
-  background: rgb(119, 33, 134);
-  background: linear-gradient(90deg, rgba(119, 33, 134, 1) 30%, rgba(49, 11, 55, 1) 63%);
+  border-radius: 5px;
+background: rgb(58, 13, 67);
+  background: linear-gradient(180deg, rgba(58, 13, 67, 1) 29%, rgba(125, 46, 138, 1) 71%);
 }
 
 #card-name {
-  font-size: 170%;
+  font-size: 160%;
   display: flex;
   justify-content: center;
-  color: rgb(255, 233, 251);
+  align-items: center;
+  color: rgb(242, 221, 130);
 }
 
 #card-img {
-  width: 100%;
-  height: 100%;
-  background: url("./components/assets/hero-placeholder.jpg") no-repeat scroll 0 0;
-  background-size: cover;
-  border-bottom: 5px solid rgb(230, 142, 55);
+  display: block;
+  border-radius: 5px;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 1.5rem;
+  width: 80%;
+  height: 80%;
 }
+
+/* Hamburger Menu */
+#menuToggle {
+  display: block;
+  position: relative;
+  margin: 1em;
+
+
+  z-index: 1;
+
+  -webkit-user-select: none;
+  user-select: none;
+}
+
+#menuToggle a {
+  text-decoration: none;
+  color: #232323;
+  transition: color 0.3s ease;
+}
+
+#menuToggle a:hover {
+  color: white;
+}
+
+
+#menuToggle input {
+  display: block;
+  width: 70px;
+  height: 32px;
+  position: absolute;
+  top: -7px;
+  left: -5px;
+
+  cursor: pointer;
+
+  opacity: 0;
+  /* hide this */
+  z-index: 2;
+  /* and place it over the hamburger */
+
+  -webkit-touch-callout: none;
+}
+
+/*
+ * Just a quick hamburger
+ */
+#menuToggle span {
+  display: block;
+  width: 33px;
+  height: 4px;
+  margin-bottom: 5px;
+  position: relative;
+
+  background: rgb(244, 105, 218);
+  border-radius: 3px;
+
+  z-index: 1;
+
+  transform-origin: 4px 0px;
+
+  transition: transform 0.5s cubic-bezier(0.77, 0.2, 0.05, 1.0),
+    background 0.5s cubic-bezier(0.77, 0.2, 0.05, 1.0),
+    opacity 0.55s ease;
+}
+
+#menuToggle span:first-child {
+  transform-origin: 0% 0%;
+}
+
+#menuToggle span:nth-last-child(2) {
+  transform-origin: 0% 100%;
+}
+
+/* 
+ * Transform all the slices of hamburger
+ * into a crossmark.
+ */
+#menuToggle input:checked~span {
+  opacity: 1;
+  transform: rotate(45deg) translate(-2px, -1px);
+  background: #232323;
+}
+
+/*
+ * But let's hide the middle one.
+ */
+#menuToggle input:checked~span:nth-last-child(3) {
+  opacity: 0;
+  transform: rotate(0deg) scale(0.2, 0.2);
+}
+
+/*
+ * Ohyeah and the last one should go the other direction
+ */
+#menuToggle input:checked~span:nth-last-child(2) {
+  transform: rotate(-45deg) translate(0, -1px);
+}
+
+/*
+ * Make this absolute positioned
+ * at the top left of the screen
+ */
+#menu {
+  display: flex;
+  flex-direction: column;
+  position: absolute;
+  width: 300px;
+  margin: -100px 0 0 -50px;
+  padding: 50px;
+  padding-top: 125px;
+
+  background: rgb(214, 126, 198);
+  background: linear-gradient(90deg, rgba(214, 126, 198, 1) 30%, rgba(225, 68, 197, 1) 63%);
+  list-style-type: none;
+  -webkit-font-smoothing: antialiased;
+  /* to stop flickering of text in safari */
+
+  transform-origin: 0% 0%;
+  transform: translate(-100%, 0);
+
+  transition: transform 0.5s cubic-bezier(0.77, 0.2, 0.05, 1.0);
+}
+
+#menu li {
+  padding: 10px 0;
+  font-size: xx-large;
+}
+
+/*
+ * And let's slide it in from the left
+ */
+#menuToggle input:checked~ul {
+  transform: none;
+}
+
+#home-icon {
+  display: flex;
+  font-size: xx-large;
+  margin-right: 1em;
+}
+
+.home-icon-and-link {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+#login-icon {
+  display: flex;
+  font-size: xx-large;
+  margin-right: 1em;
+}
+
+.login-icon-and-link {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+#register-icon {
+  display: flex;
+  font-size: xx-large;
+  margin-right: 1em;
+}
+
+.register-icon-and-link {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+
+/* ----- */
+
