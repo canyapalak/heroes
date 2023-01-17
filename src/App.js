@@ -1,9 +1,9 @@
 import React from "react";
 import { useState, useEffect } from "react";
-import BurgerMenu from "./components/BurgerMenu";
-import Footer from "./components/Footer";
-import HeroCards from "./components/HeroCards";
-import Navbar from "./components/Navbar";
+import { Routes, Route } from "react-router-dom";
+import DetailsPage from "./views/DetailsPage";
+import Home from "./views/Home";
+import NoMatch from "./views/NoMatch";
 
 function App() {
   const [heroes, setHeroes] = useState([]);
@@ -12,10 +12,10 @@ function App() {
 
   const fetchHeroes = async () => {
     const response = await fetch(
-      "https://www.superheroapi.com/api.php/10159060549017724/search/bo"
+      "https://www.superheroapi.com/api.php/10159060549017724/search/super"
     );
     const result = await response.json();
-    console.log("Async result: ", result);
+    // console.log("Async result: ", result);
     setHeroes(result.results);
   };
 
@@ -24,11 +24,12 @@ function App() {
   }, []);
 
   return (
-    <div className="home">
-      <BurgerMenu />
-      <Navbar />
-      <HeroCards heroes={heroes} />
-      <Footer />
+    <div className="App">
+      <Routes>
+        <Route path="/" element={<Home heroes={heroes} />} />
+        <Route path="/:id" element={<DetailsPage heroes={heroes} />} />
+        <Route path="*" element={<NoMatch />} />
+      </Routes>
     </div>
   );
 }

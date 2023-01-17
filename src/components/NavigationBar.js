@@ -1,11 +1,11 @@
 import React from "react";
 import HeroesLogo from "./assets/heroes-noback.png";
 
-function Navbar({ heroes }) {
+function NavigationBar() {
   return (
     <div className="navbar">
       <img src={HeroesLogo} alt="Logo" id="heroes-logo" />
     </div>
   );
 }
-export default Navbar;
+export default NavigationBar;

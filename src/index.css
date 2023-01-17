@@ -7,6 +7,7 @@ body {
   font-family: 'HortaRegular';
   font-size: larger;
   letter-spacing: 1px;
+  height: 100vh;
   font-weight: normal;
   font-style: normal;
   -webkit-animation: backgroundScroll 15s linear 1;
@@ -18,6 +19,11 @@ body {
   animation-direction: alternate-reverse;
   -webkit-animation-direction: alternate-reverse;
 }
+
+a:link {
+  text-decoration: none;
+}
+
 
 /* Sliding Background */
 @keyframes backgroundScroll {
@@ -118,11 +124,15 @@ body {
 
 /* Footer */
 #footer {
-  background: rgb(214, 126, 198);
-  background: linear-gradient(90deg, rgba(214, 126, 198, 1) 30%, rgba(225, 68, 197, 1) 63%);
+background: rgb(198, 102, 181);
+  background: linear-gradient(90deg, rgba(198, 102, 181, 1) 32%, rgba(210, 65, 182, 1) 66%);
   font-size: larger;
-  display:block;
-  position:sticky;
+
+      position:relative;
+        left: 0;
+        bottom: 0;
+        width: 100%;
+        text-align: center;
 }
 
 #footer p {
@@ -142,16 +152,16 @@ body {
   margin: 1rem;
   border: 5px solid rgb(230, 142, 55);
   border-radius: 5px;
-background: rgb(58, 13, 67);
+  background: rgb(58, 13, 67);
   background: linear-gradient(180deg, rgba(58, 13, 67, 1) 29%, rgba(125, 46, 138, 1) 71%);
 }
 
 #card-name {
-  font-size: 160%;
+  font-size: 180%;
   display: flex;
   justify-content: center;
   align-items: center;
-  color: rgb(242, 221, 130);
+  color: rgb(240, 228, 160);
 }
 
 #card-img {
