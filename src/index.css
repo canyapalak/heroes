@@ -149,10 +149,9 @@ a:link {
 /* Card Styling */
 .hero-card {
   margin: 1rem;
-  border: 5px solid rgb(230, 142, 55);
+  border: 3px solid rgb(230, 142, 55);
   border-radius: 5px;
-  background: rgb(58, 13, 67);
-  background: linear-gradient(180deg, rgba(58, 13, 67, 1) 29%, rgba(125, 46, 138, 1) 71%);
+  background: linear-gradient(180deg, rgb(9, 5, 15) 29%, rgb(72, 18, 86) 71%);
 }
 
 #card-name {
@@ -160,7 +159,7 @@ a:link {
   display: flex;
   justify-content: center;
   align-items: center;
-  color: rgb(240, 228, 160);
+  color: rgb(224, 224, 53);
 }
 
 #card-img {
@@ -171,6 +170,138 @@ a:link {
   margin-top: 1.5rem;
   width: 80%;
   height: 80%;
+}
+
+/* Details Page */
+.details-card {
+  text-align: center;
+  margin-right: 2rem;
+  margin-left: 2rem;
+  margin-bottom: 1rem;
+  padding-left: 1rem;
+  padding-right: 1rem;
+  font-size: 120%;
+  color: white;
+  border: 3px solid rgb(230, 142, 55);
+  border-radius: 5px;
+  background: linear-gradient(90deg, rgb(9, 5, 15) 29%, rgb(72, 18, 86) 71%);
+}
+
+#details-name {
+  text-align: center;
+  font-size: 3rem;
+  color: rgb(224, 224, 53);
+  margin-top: 1rem;
+}
+
+#details-image {
+  width: 20rem;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: -1.5rem;
+  display: block;
+  border-radius: 5px;
+}
+
+#sub-titles {
+  color: rgb(224, 224, 53);
+  margin-top: 1rem;
+  font-size: 130%;
+  text-decoration: underline;
+  text-align: left;
+
+}
+
+#each-stat-title {
+  color: rgb(233, 244, 227);
+  margin-bottom: -0.1rem;
+  text-align: left;
+}
+
+.st-1 {
+  background: linear-gradient(62deg, #f9c5a6 0%, rgb(247, 134, 14) 100%);
+  border-top-right-radius: 10px;
+  border-bottom-right-radius: 10px;
+  height: 1.2rem;
+  font-size: 1rem;
+  color: black;
+  padding-left: 1rem;
+  text-align: left;
+}
+
+.st-2 {
+  background: linear-gradient(62deg, #a6f9ac 0%, rgb(9, 164, 63) 100%);
+  border-top-right-radius: 10px;
+  border-bottom-right-radius: 10px;
+  height: 1.2rem;
+  font-size: 1rem;
+  color: black;
+  padding-left: 1rem;
+  text-align: left;
+}
+
+.st-3 {
+  background: linear-gradient(62deg, #f1a6f9 0%, rgb(223, 66, 200) 100%);
+  border-top-right-radius: 10px;
+  border-bottom-right-radius: 10px;
+  height: 1.2rem;
+  font-size: 1rem;
+  color: black;
+  padding-left: 1rem;
+  text-align: left;
+
+}
+
+.st-4 {
+  background: linear-gradient(62deg, #a6d9f9 0%, rgb(21, 104, 198) 100%);
+  border-top-right-radius: 10px;
+  border-bottom-right-radius: 10px;
+  height: 1.2rem;
+  font-size: 1rem;
+  color: black;
+  padding-left: 1rem;
+  text-align: left;
+
+}
+
+.st-5 {
+  background: linear-gradient(62deg, #ec8a8a 0%, rgb(213, 36, 20) 100%);
+  border-top-right-radius: 10px;
+  border-bottom-right-radius: 10px;
+  height: 1.2rem;
+  font-size: 1rem;
+  color: black;
+  padding-left: 1rem;
+  text-align: left;
+}
+
+.st-6 {
+  background: linear-gradient(62deg, #e9e9b4 0%, rgb(227, 211, 34) 100%);
+  border-top-right-radius: 10px;
+  border-bottom-right-radius: 10px;
+  height: 1.2rem;
+  font-size: 1rem;
+  color: black;
+  padding-left: 1rem;
+  text-align: left;
+}
+
+#small-parts {
+  display: flex;
+  flex-direction: row;
+  margin-bottom: -0.5rem;
+}
+
+#small-titles {
+  margin-right: 0.3rem;
+  color: #3dede1;
+  text-align: left;
+  display: inline-block;
+}
+
+#small-info {
+  text-align: left;
+  color: rgb(233, 244, 227);
 }
 
 /* Hamburger Menu */
@@ -225,7 +356,7 @@ a:link {
   margin-bottom: 5px;
   position: relative;
 
-  background: rgb(244, 105, 218);
+  background: rgb(246, 117, 222);
   border-radius: 3px;
 
   z-index: 1;
@@ -333,13 +464,13 @@ a:link {
   align-items: center;
 }
 
-#register-icon {
+#chatroom-icon {
   display: flex;
   font-size: xx-large;
   margin-right: 1em;
 }
 
-.register-icon-and-link {
+.chatroom-icon-and-link {
   display: flex;
   flex-wrap: wrap;
   justify-content: flex-start;

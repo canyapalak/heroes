@@ -1,10 +1,13 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import HeroesLogo from "./assets/heroes-noback.png";
 
 function NavigationBar() {
   return (
     <div className="navbar">
-      <img src={HeroesLogo} alt="Logo" id="heroes-logo" />
+      <Link to="/">
+        <img src={HeroesLogo} alt="Logo" id="heroes-logo" />
+      </Link>
     </div>
   );
 }
