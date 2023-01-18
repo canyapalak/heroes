@@ -23,6 +23,32 @@ function App() {
     fetchHeroes().catch((error) => console.log("Async error: ", error));
   }, []);
 
+  // FETCH SPECIFIC HEROES WITH PROMISE.ALL
+
+  // const [defaultHeroes, setDefaultHeroes] = useState([]);
+
+  // Promise.all([
+  //   fetch(`https://www.superheroapi.com/api.php/${apiKey}/70`),
+  //   fetch(`https://www.superheroapi.com/api.php/${apiKey}/620`),
+  //   fetch(`https://www.superheroapi.com/api.php/${apiKey}/717`),
+  //   fetch(`https://www.superheroapi.com/api.php/${apiKey}/720`),
+  // ])
+  //   .then(function (responses) {
+  //     return Promise.all(
+  //       responses.map(function (response) {
+  //         return response.json();
+  //       })
+  //     );
+  //   })
+  //   .then(function (defaultHeroes) {
+  //     console.log("Default Heroes: ", defaultHeroes);
+  //   })
+  //   .catch(function (error) {
+  //     console.log("error :", error);
+  //   });
+
+  // setDefaultHeroes(defaultHeroes);
+
   return (
     <div className="App">
       <Routes>
