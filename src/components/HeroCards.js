@@ -17,10 +17,10 @@ function HeroCards({ heroes }) {
           <Link to={hero.id} key={hero.id}>
             <Card style={{ width: "16rem" }} className="hero-card">
               <Card.Img
-                variant="top"
                 src={hero.image.url}
                 id="card-img"
                 onError={onImageError}
+                alt={hero.name}
               />
               <Card.Body>
                 <Card.Title id="card-name">{hero.name}</Card.Title>

@@ -8,14 +8,14 @@ import NoMatch from "./views/NoMatch";
 function App() {
   const [heroes, setHeroes] = useState([]);
 
-  // API KEY: 10159060549017724
+  const apiKey = "10159060549017724";
 
   const fetchHeroes = async () => {
     const response = await fetch(
-      "https://www.superheroapi.com/api.php/10159060549017724/search/super"
+      `https://www.superheroapi.com/api.php/${apiKey}/search/super`
     );
     const result = await response.json();
-    // console.log("Async result: ", result);
+    console.log("Async result: ", result);
     setHeroes(result.results);
   };
 

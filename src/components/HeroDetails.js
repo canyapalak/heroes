@@ -1,7 +1,7 @@
-//import useParams
-import { useState, useEffect } from "react";
+//import useParamsimport { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
-
+import { useState, useEffect } from "react";
+import Card from "react-bootstrap/Card";
 import HeroPlaceholder from "./assets/hero-placeholder.jpg";
 
 function HeroDetails() {
@@ -30,8 +30,15 @@ function HeroDetails() {
     <div className="details-container">
       {oneHero ? (
         <>
-          <p>{oneHero.occupation}</p>
-          <img src={oneHero.image.url} alt={oneHero.name} />
+          <Card style={{ width: "35rem" }} className="hero-details">
+            <h1>{oneHero.name}</h1>
+            <p>{oneHero.work.occupation}</p>
+            <img
+              src={oneHero.image.url}
+              alt={oneHero.name}
+              onError={onImageError2}
+            />
+          </Card>
         </>
       ) : (
         ""
