@@ -24,9 +24,10 @@ function HeroCards({ defaultHeroes }) {
 
   useEffect(() => {
     filterHeroes()
-  }, [searchInput])
+  }, [searchInput, filterHeroes])
   
   return (
+    
     <div className="heroes-and-search">
       <SearchBar getInput={getInput} />
       <div className="heroes-container">

@@ -1,8 +1,5 @@
 import Card from "react-bootstrap/Card";
 import Button from "react-bootstrap/Button";
-import heroesPanoramic from "./assets/heroes-panoramic.jpg";
-
-
 
 function LoginWindow() {
     return (
@@ -12,19 +9,22 @@ function LoginWindow() {
             <input
         type="text"
         placeholder="e.g. batman@yahoo.com"
-        className="input-bar"
+        className="login-input-bar"
         aria-label="Search"
       />
             <div className="login-titles"><p>Password:</p></div>
             <input
         type="text"
         placeholder="Password"
-        className="input-bar"
+        className="login-input-bar"
         aria-label="Search"
             />
             <Button
         variant="outline-success"
-        className="search-button">Log In</Button>
+                className="login-button">Log In</Button>
+            <div className="register-text"><p>You don't have an account?</p></div>
+            <div className="register-text-link"><p>Register here.</p></div>
+
             
 
 

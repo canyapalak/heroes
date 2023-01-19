@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 
 function BurgerMenu() {
+  
   return (
     <nav role="navigation">
       <div id="menuToggle">
@@ -34,13 +35,14 @@ function BurgerMenu() {
           <div className="login-icon-and-link">
             <i className="bi bi-door-open-fill" id="login-icon"></i>
                      <Link to="login">
-              <li>Log In</li></Link>
+              <li>Log In</li>
+            </Link>
           </div>
           <div className="chatroom-icon-and-link">
             <i className="bi bi-chat-square-text-fill" id="chatroom-icon"></i>
-            <a href="http://www.google.com">
+                    <Link to="/">
               <li>Chat Room</li>
-            </a>
+              </Link>
           </div>
         </ul>
       </div>
