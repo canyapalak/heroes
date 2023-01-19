@@ -4,12 +4,12 @@ import Footer from "../components/Footer";
 import HeroCards from "../components/HeroCards";
 import NavigationBar from "../components/NavigationBar";
 
-function Home({ heroes }) {
+function Home({ defaultHeroes }) {
   return (
     <div className="home">
       <BurgerMenu />
       <NavigationBar />
-      <HeroCards heroes={heroes} />
+      <HeroCards defaultHeroes={defaultHeroes} />
       <Footer />
     </div>
   );

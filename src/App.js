@@ -6,10 +6,11 @@ import Home from "./views/Home";
 import NoMatch from "./views/NoMatch";
 
 function App() {
-  const [heroes, setHeroes] = useState([]);
-
   const apiKey = "10159060549017724";
 
+  // PREVIOUS FETCH WITH SEARCH ENDPOINT
+
+  // const [heroes, setHeroes] = useState([]);
   // const fetchHeroes = async () => {
   //   const response = await fetch(
   //     `https://www.superheroapi.com/api.php/${apiKey}/search/super`
@@ -19,13 +20,17 @@ function App() {
   //   setHeroes(result.results);
   // };
 
+  // FETCH SPECIFIC HEROES WITH PROMISE.ALL
+
+  const [defaultHeroes, setDefaultHeroes] = useState([]);
   useEffect(() => {
-    // fetchHeroes().catch((error) => console.log("Async error: ", error));
     Promise.all([
       fetch(`https://www.superheroapi.com/api.php/${apiKey}/70`),
       fetch(`https://www.superheroapi.com/api.php/${apiKey}/620`),
-      fetch(`https://www.superheroapi.com/api.php/${apiKey}/717`),
+      fetch(`https://www.superheroapi.com/api.php/${apiKey}/644`),
+      fetch(`https://www.superheroapi.com/api.php/${apiKey}/332`),
       fetch(`https://www.superheroapi.com/api.php/${apiKey}/720`),
+      fetch(`https://www.superheroapi.com/api.php/${apiKey}/659`),
     ])
       .then(function (responses) {
         return Promise.all(
@@ -36,24 +41,18 @@ function App() {
       })
       .then(function (defaultHeroes) {
         console.log("Default Heroes: ", defaultHeroes);
-        setHeroes(defaultHeroes);
+        setDefaultHeroes(defaultHeroes);
       })
       .catch(function (error) {
         console.log("error :", error);
       });
   }, []);
 
-  // FETCH SPECIFIC HEROES WITH PROMISE.ALL
-
-  // const [defaultHeroes, setDefaultHeroes] = useState([]);
-
-  // setDefaultHeroes(defaultHeroes); //REVIEW if you set a state outside outside of a function you control, or outside an useEffect, it will create an infinite loop (update the state variable, which creates a rerender of the component, that changes the sate...etc..)
-
   return (
     <div className="App">
       <Routes>
-        <Route path="/" element={<Home heroes={heroes} />} />
-        <Route path="/:id" element={<DetailsPage heroes={heroes} />} />
+        <Route path="/" element={<Home defaultHeroes={defaultHeroes} />} />
+        <Route path="/:id" element={<DetailsPage />} />
         <Route path="*" element={<NoMatch />} />
       </Routes>
     </div>

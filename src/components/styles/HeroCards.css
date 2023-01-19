@@ -1,0 +1,24 @@
+.hero-card {
+    margin: 1rem;
+    border: 3px solid rgb(230, 142, 55);
+    border-radius: 5px;
+    background: linear-gradient(180deg, rgb(9, 5, 15) 29%, rgb(72, 18, 86) 71%);
+}
+
+#card-name {
+    font-size: 180%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: rgb(224, 224, 53);
+}
+
+#card-img {
+    display: block;
+    border-radius: 5px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 1.5rem;
+    width: 80%;
+    height: 80%;
+}

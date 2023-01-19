@@ -1,3 +1,5 @@
+import { Link } from "react-router-dom";
+
 function BurgerMenu() {
   return (
     <nav role="navigation">
@@ -25,9 +27,9 @@ function BurgerMenu() {
         <ul id="menu">
           <div className="home-icon-and-link">
             <i className="bi bi-house-door-fill" id="home-icon"></i>
-            <a href="http://www.google.com">
+            <Link to="/">
               <li>Home</li>
-            </a>
+            </Link>
           </div>
           <div className="login-icon-and-link">
             <i className="bi bi-door-open-fill" id="login-icon"></i>
