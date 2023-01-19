@@ -7,6 +7,7 @@ import "../src/components/styles/HeroCards.css";
 import "../src/components/styles/HeroDetails.css";
 import "../src/components/styles/NavigationBar.css";
 import "../src/components/styles/SearchBar.css";
+import "../src/components/styles/LoginPage.css";
 import App from "./App";
 import { BrowserRouter } from "react-router-dom";
 

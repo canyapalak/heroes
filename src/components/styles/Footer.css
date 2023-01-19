@@ -17,6 +17,10 @@
     color: rgb(245, 234, 14);
 }
 
+#footer-text a:hover {
+    color: white;
+}
+
 #footer-flash {
     width: 3rem;
 }

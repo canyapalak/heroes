@@ -33,9 +33,8 @@ function BurgerMenu() {
           </div>
           <div className="login-icon-and-link">
             <i className="bi bi-door-open-fill" id="login-icon"></i>
-            <a href="http://www.google.com">
-              <li>Log In</li>
-            </a>
+                     <Link to="login">
+              <li>Log In</li></Link>
           </div>
           <div className="chatroom-icon-and-link">
             <i className="bi bi-chat-square-text-fill" id="chatroom-icon"></i>

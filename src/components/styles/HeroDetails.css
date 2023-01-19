@@ -1,7 +1,7 @@
 .details-card {
     margin-right: 2rem;
     margin-left: 2rem;
-    margin-bottom: 1rem;
+    margin-bottom: 2rem;
     padding-left: 1rem;
     padding-right: 1rem;
     font-size: 120%;
@@ -107,7 +107,6 @@
     flex-direction: row;
     flex-wrap: wrap;
     margin-bottom: -0.5rem;
-
 }
 
 #small-titles {

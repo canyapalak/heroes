@@ -1,17 +1,17 @@
 import React from "react";
 import BurgerMenu from "../components/BurgerMenu";
 import Footer from "../components/Footer";
-import HeroCards from "../components/HeroCards";
+import LoginWindow from "../components/LoginWindow";
 import NavigationBar from "../components/NavigationBar";
 
-function Home({ defaultHeroes }) {
+function Login() {
   return (
-    <div className="home">
+    <div className="login-page">
       <BurgerMenu />
       <NavigationBar />
-      <HeroCards defaultHeroes={defaultHeroes}/>
+      <LoginWindow />
       <Footer />
     </div>
   );
 }
-export default Home;
+export default Login;

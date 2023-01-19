@@ -11,7 +11,7 @@ function HeroDetails() {
 
   const fetchOneHero = async () => {
     const response = await fetch(
-      `https://www.superheroapi.com/api.php/10159060549017724/${id}`
+      `https://www.superheroapi.com/api.php/${process.env.REACT_APP_APIKEY}/${id}`
     );
     const result = await response.json();
     console.log("Async result: ", result);

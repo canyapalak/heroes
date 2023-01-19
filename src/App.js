@@ -4,9 +4,9 @@ import { Routes, Route } from "react-router-dom";
 import DetailsPage from "./views/DetailsPage";
 import Home from "./views/Home";
 import NoMatch from "./views/NoMatch";
+import LoginPage from "./views/LoginPage";
 
 function App() {
-  const apiKey = "10159060549017724";
 
   // PREVIOUS FETCH WITH SEARCH ENDPOINT
 
@@ -23,29 +23,42 @@ function App() {
   // FETCH SPECIFIC HEROES WITH PROMISE.ALL
 
   const [defaultHeroes, setDefaultHeroes] = useState([]);
+  const ids = [70, 620, 644, 332, 720, 659];
   useEffect(() => {
-    Promise.all([
-      fetch(`https://www.superheroapi.com/api.php/${apiKey}/70`),
-      fetch(`https://www.superheroapi.com/api.php/${apiKey}/620`),
-      fetch(`https://www.superheroapi.com/api.php/${apiKey}/644`),
-      fetch(`https://www.superheroapi.com/api.php/${apiKey}/332`),
-      fetch(`https://www.superheroapi.com/api.php/${apiKey}/720`),
-      fetch(`https://www.superheroapi.com/api.php/${apiKey}/659`),
-    ])
-      .then(function (responses) {
-        return Promise.all(
-          responses.map(function (response) {
-            return response.json();
-          })
-        );
+    // Promise.all([
+    //   fetch(`https://www.superheroapi.com/api.php/${apiKey}/70`),
+    //   fetch(`https://www.superheroapi.com/api.php/${apiKey}/620`),
+    //   fetch(`https://www.superheroapi.com/api.php/${apiKey}/644`),
+    //   fetch(`https://www.superheroapi.com/api.php/${apiKey}/332`),
+    //   fetch(`https://www.superheroapi.com/api.php/${apiKey}/720`),
+    //   fetch(`https://www.superheroapi.com/api.php/${apiKey}/659`),
+    // ])
+    Promise.all(
+      ids.map((id) => {
+        return fetch(
+          `https://www.superheroapi.com/api.php/${process.env.REACT_APP_APIKEY}/${id}`
+        ).then((response) => response.json());
       })
-      .then(function (defaultHeroes) {
-        console.log("Default Heroes: ", defaultHeroes);
-        setDefaultHeroes(defaultHeroes);
-      })
-      .catch(function (error) {
-        console.log("error :", error);
-      });
+    ).then((result) => {
+      console.log("result :>> ", result)
+      setDefaultHeroes(result)
+    });
+
+    // .then(function (responses) {
+    //   console.log("responses :>> ", responses);
+    //   return Promise.all(
+    //     responses.map(function (response) {
+    //       return response.json();
+    //     })
+    //   );
+    // })
+    // .then(function (defaultHeroes) {
+    //   console.log("Default Heroes: ", defaultHeroes);
+    //   setDefaultHeroes(defaultHeroes);
+    // })
+    // .catch(function (error) {
+    //   console.log("error :", error);
+    // });
   }, []);
 
   return (
@@ -53,6 +66,7 @@ function App() {
       <Routes>
         <Route path="/" element={<Home defaultHeroes={defaultHeroes} />} />
         <Route path="/:id" element={<DetailsPage />} />
+        <Route path="/login" element={<LoginPage />} />
         <Route path="*" element={<NoMatch />} />
       </Routes>
     </div>
