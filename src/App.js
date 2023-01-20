@@ -5,6 +5,7 @@ import DetailsPage from "./views/DetailsPage";
 import Home from "./views/Home";
 import NoMatch from "./views/NoMatch";
 import LoginPage from "./views/LoginPage";
+import { SearchContextProvider } from "./context/SearchContext";
 
 function App() {
 
@@ -63,12 +64,14 @@ function App() {
 
   return (
     <div className="App">
+      <SearchContextProvider>
       <Routes>
         <Route path="/" element={<Home defaultHeroes={defaultHeroes} />} />
         <Route path="/:id" element={<DetailsPage />} />
         <Route path="/login" element={<LoginPage />} />
         <Route path="*" element={<NoMatch />} />
-      </Routes>
+        </Routes>
+      </SearchContextProvider>
     </div>
   );
 }

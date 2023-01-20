@@ -1,7 +1,11 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import Button from "react-bootstrap/Button";
+import { SearchContext } from "../context/SearchContext";
 
-function SearchBar({getInput}) {
+function SearchBar({}) {
+  
+  const { searchResult, fetchSearchInput} = useContext(SearchContext)
+  const [inputValue, setInputValue] = useState('')
   // const [searchInput, setSearchInput] = useState([]); // let's set this state in the parent component
 
   // const apiKey = "10159060549017724";
@@ -14,10 +18,19 @@ function SearchBar({getInput}) {
   //   console.log("Async result: ", result);
   //   setSearchedHeroes(result.results);
   // };
-  const submitInput = (e) => {
-e.preventDefault()
-getInput(e.target.value)
+//   const submitInput = (e) => {
+// e.preventDefault()
+// getInput(e.target.value)
+//   }
+  const handleChange = (e) => {
+    setInputValue(e.target.value)
+    // console.log('inputValue :>> ', inputValue);
   }
+
+  const handleClick = () => {
+fetchSearchInput(inputValue)
+  }
+    
 
   return (
     <div className="d-flex" id="bar-and-button">
@@ -26,19 +39,17 @@ getInput(e.target.value)
         placeholder="Search a Hero"
         className="input-bar"
         aria-label="Search"
-        onInput={submitInput}
+        onChange={handleChange}
       />
       <Button
         variant="outline-success"
         className="search-button"
-        onClick={(e) => {
-          console.log('e.target :>> ', e.target);
-          getInput(e.target.value)
-        }}
+        onClick={handleClick}
       >
         {" "}
         Go!
       </Button>{" "}
+      {console.log('searchResult', searchResult)}
     </div>
   );
 }

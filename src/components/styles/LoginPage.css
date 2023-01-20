@@ -27,7 +27,7 @@
 }
 
 .login-input-bar {
-    width: 17rem;
+    width: 15rem;
     height: 2.5rem;
     border: 3px solid rgb(214, 126, 198);
     border-radius: 7px;
@@ -67,10 +67,26 @@
     padding-top: 3rem;
 }
 
-.register-text-link {
+.login-card a {
+    color: rgb(214, 126, 198);
+}
+
+.login-card a:hover {
+    color: white;
+}
+
+/* .register-text-link {
     color: rgb(246, 117, 222);
 }
 
 .register-text-link:hover {
     color: white;
 }
+
+.register-text-link:active {
+    color: aquamarine;
+}
+
+.register-text-link:focus {
+    color:hotpink;
+} */

@@ -2,11 +2,16 @@ import Card from "react-bootstrap/Card";
 import SearchBar from "./SearchBar";
 import { Link } from "react-router-dom";
 import HeroPlaceholder from "./assets/hero-placeholder.jpg";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
+import { SearchContext } from "../context/SearchContext";
 
 function HeroCards({ defaultHeroes }) {
+
+  const { searchResult } = useContext(SearchContext)
+  
   const [searchInput, setSearchInput] = useState([]);
-  const [filteredHeroes, setFilteredHeroes] = useState(defaultHeroes)
+  const [searchedHeroes, setSearchedHeroes] = useState(defaultHeroes)
+
   const onImageError = (e) => {
     e.target.src = HeroPlaceholder;
   };
@@ -15,24 +20,24 @@ function HeroCards({ defaultHeroes }) {
     console.log('input :>> ', input);
     setSearchInput(input)
   }
-  const filterHeroes = () => {
-    const filteredHeroesArray = defaultHeroes.filter((defaultHero) => 
+  const searchHeroes = () => {
+    const searchedHeroesArray = defaultHeroes.filter((defaultHero) => 
     { return defaultHero.name.includes(searchInput) })
-    console.log('filteredHeroesArray', filteredHeroesArray)
-    setFilteredHeroes(filteredHeroesArray)
+    console.log('searchedHeroesArray', searchedHeroesArray)
+    setSearchedHeroes(searchedHeroesArray)
   }
 
   useEffect(() => {
-    filterHeroes()
-  }, [searchInput, filterHeroes])
+    searchHeroes()
+  }, [defaultHeroes])
   
   return (
     
     <div className="heroes-and-search">
       <SearchBar getInput={getInput} />
       <div className="heroes-container">
-        {filteredHeroes &&
-          filteredHeroes.map((hero) => (
+        {searchedHeroes &&
+          searchedHeroes.map((hero) => (
             <Link to={hero.id} key={hero.id}>
               <Card style={{ width: "16rem" }} className="hero-card">
                 <Card.Img
