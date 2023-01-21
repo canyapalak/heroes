@@ -15,4 +15,10 @@
     margin-left: auto;
     margin-right: auto;
     background-color: transparent;
+    transition: transform 300ms;
 }
+
+#heroes-logo:hover {
+    transform: scale(1.1)
+}
+

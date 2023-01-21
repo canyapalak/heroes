@@ -25,7 +25,21 @@
     margin-top: -1.5rem;
     display: block;
     border-radius: 5px;
+    -webkit-mask-image: linear-gradient(45deg, rgb(156, 164, 165) 25%, rgba(70, 222, 233, 0.591) 50%, rgb(120, 224, 210) 75%);
+    mask-image: linear-gradient(45deg, #000 25%, rgba(67, 222, 214, 0.628) 50%, rgb(160, 160, 160) 75%);
+    -webkit-mask-size: 800%;
+    mask-size: 800%;
+    -webkit-mask-position: 0;
+    mask-position: 0;
 }
+
+#details-image {
+    transition: mask-position 2s ease, -webkit-mask-position 2s ease;
+    -webkit-mask-position: 120%;
+    mask-position: 120%;
+    opacity: 1;
+}
+
 
 #sub-titles {
     color: rgb(224, 224, 53);

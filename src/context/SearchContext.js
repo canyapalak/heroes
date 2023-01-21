@@ -14,12 +14,15 @@ export const SearchContextProvider = (props) => {
         const result = await response.json();
         setSearchResult(result);
         } catch (error) {
-            <p>No heroes found.</p>
     } 
-  };
+    };
+    
+    const resetSearch = () => {
+        setSearchResult([]);
+}
 
     return (
-        <SearchContext.Provider value={{searchResult, fetchSearchInput}}>
+        <SearchContext.Provider value={{searchResult, fetchSearchInput, resetSearch}}>
             {props.children}
         </SearchContext.Provider>
     )

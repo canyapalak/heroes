@@ -30,6 +30,10 @@ function SearchBar({}) {
   const handleClick = () => {
 fetchSearchInput(inputValue)
   }
+
+  const handleReset = () => {
+  resetSearch();
+}
     
 
   return (
@@ -49,6 +53,18 @@ fetchSearchInput(inputValue)
         {" "}
         Go!
       </Button>{" "}
+
+      
+{/* NOT WORKING */}
+            <Button
+        variant="outline-success"
+        className="search-button"
+        onClick={handleReset}
+      >
+        {" "}
+        Reset
+      </Button>{" "}
+
       {console.log('searchResult', searchResult)}
     </div>
   );

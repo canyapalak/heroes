@@ -3,6 +3,13 @@
     border: 3px solid rgb(230, 142, 55);
     border-radius: 5px;
     background: linear-gradient(180deg, rgb(9, 5, 15) 29%, rgb(72, 18, 86) 71%);
+    transition: transform 300ms;
+    max-height: 25rem;
+}
+
+.hero-card:hover {
+    transform: scale(1.07);
+    
 }
 
 #card-name {
@@ -11,6 +18,7 @@
     justify-content: center;
     align-items: center;
     color: rgb(224, 224, 53);
+
 }
 
 #card-img {
@@ -21,4 +29,6 @@
     margin-top: 1.5rem;
     width: 80%;
     height: 80%;
+    max-height: 17rem;
+    min-height: 17rem;
 }
