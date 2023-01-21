@@ -7,7 +7,7 @@ body {
   font-family: 'HortaRegular';
   font-size: larger;
   letter-spacing: 1px;
-  height: 100vh;
+  min-height: 100% !important;
   font-weight: normal;
   font-style: normal;
   -webkit-animation: backgroundScroll 15s linear 1;
@@ -18,6 +18,7 @@ body {
   -webkit-animation-iteration-count: infinite;
   animation-direction: alternate-reverse;
   -webkit-animation-direction: alternate-reverse;
+      position: absolute;
 }
 
 a:link {
@@ -54,3 +55,8 @@ a:link {
   margin-bottom: 1rem;
 }
 
+html,
+body {
+  height: 100% !important;
+  width: 100% !important;
+}

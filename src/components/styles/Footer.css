@@ -2,7 +2,6 @@
     background: rgb(198, 102, 181);
     background: linear-gradient(90deg, rgba(198, 102, 181, 1) 32%, rgb(170, 66, 149) 66%);
     font-size: larger;
-    position: relative;
     left: 0;
     bottom: 0;
     width: 100%;

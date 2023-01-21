@@ -32,3 +32,10 @@
     max-height: 17rem;
     min-height: 17rem;
 }
+
+.no-heroes-found {
+    font-size: xx-large;
+    color: #3dede1;
+    margin: 2rem;
+    text-align: left;
+}

@@ -49,7 +49,7 @@ const [heroes, setHeroes] = useState([]);
             </Card>
         </Link>
     )) :
-          <div>No results found</div>
+          <div className="no-heroes-found"><p>No heroes found. Try another search.</p></div>
         }
       </div>
     </div>)

@@ -1,5 +1,6 @@
 import React, { useState, useContext } from "react";
 import Button from "react-bootstrap/Button";
+import { Link } from "react-router-dom";
 import { SearchContext } from "../context/SearchContext";
 
 function SearchBar({}) {
@@ -30,10 +31,12 @@ function SearchBar({}) {
   const handleClick = () => {
 fetchSearchInput(inputValue)
   }
+  
+  // const { searchDispatch } = useContext(SearchContext);
 
-  const handleReset = () => {
-  resetSearch();
-}
+  // const handleHomeClick = () => {
+  //   searchDispatch({ type: "reset" });
+  // };
     
 
   return (
@@ -50,22 +53,19 @@ fetchSearchInput(inputValue)
         className="search-button"
         onClick={handleClick}
       >
-        {" "}
-        Go!
-      </Button>{" "}
 
-      
-{/* NOT WORKING */}
+        Go!
+      </Button>
+      {/* <Link to="/" onClick={handleHomeClick}>
             <Button
         variant="outline-success"
         className="search-button"
-        onClick={handleReset}
       >
-        {" "}
         Reset
-      </Button>{" "}
+      </Button>
+      </Link> */}
 
-      {console.log('searchResult', searchResult)}
+      {/* {console.log('searchResult', searchResult)} */}
     </div>
   );
 }
