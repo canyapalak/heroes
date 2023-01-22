@@ -33,7 +33,7 @@
 
 .search-button:active {
     background-color: rgb(59, 47, 59) !important;
-        border: 3px solid rgb(214, 126, 198) !important;
+    border: 3px solid rgb(214, 126, 198) !important;
 }
 
 #bar-and-button {

@@ -23,7 +23,7 @@
 }
 
 .login-titles{
-    padding-top: 2rem;
+    padding-top: 1rem;
 }
 
 .login-input-bar {
@@ -50,21 +50,28 @@
     border: 3px solid rgb(214, 126, 198);
     border-radius: 7px;
     font-size: x-large;
+    letter-spacing: 1px;
     color: white;    
-    }
+}
     
-    .login-button:hover {
-    background-color: rgb(91, 62, 96);
-    border: 3px solid rgb(214, 126, 198);
-    }
+.login-button:hover {
+    background-color: rgb(91, 62, 96) !important;
+    border: 3px solid rgb(214, 126, 198) !important;
+}
     
-    .login-button:active {
+.login-button:active {
     background-color: rgb(59, 47, 59) !important;
     border: 3spx solid rgb(214, 126, 198) !important;
-    }
+}
 
 .register-text {
-    padding-top: 3rem;
+    padding-top: 1rem;
+}
+
+.register-welcome {
+    color: rgb(224, 224, 53);
+    font-size: xx-large;
+    margin-top: -2rem;
 }
 
 .login-card a {
@@ -75,18 +82,12 @@
     color: white;
 }
 
-/* .register-text-link {
-    color: rgb(246, 117, 222);
+#login-line {
+    width: 70%;
+    position: relative;
+    color: rgb(224, 224, 53);
+    background-color: rgb(224, 224, 53);
+    height: 0.2rem;
+    opacity: 70%;
+    margin-top: 3rem;
 }
-
-.register-text-link:hover {
-    color: white;
-}
-
-.register-text-link:active {
-    color: aquamarine;
-}
-
-.register-text-link:focus {
-    color:hotpink;
-} */
