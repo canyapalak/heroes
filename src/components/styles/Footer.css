@@ -6,6 +6,9 @@
     bottom: 0;
     width: 100%;
     text-align: center;
+    position: relative;
+    margin-top: auto !important;
+    height: 7em;
 }
 
 #footer p {

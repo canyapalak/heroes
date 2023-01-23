@@ -18,8 +18,9 @@ body {
   -webkit-animation-iteration-count: infinite;
   animation-direction: alternate-reverse;
   -webkit-animation-direction: alternate-reverse;
-      position: absolute;
+  position: absolute;
 }
+
 
 a:link {
   text-decoration: none;
@@ -52,8 +53,22 @@ a:link {
   flex-wrap: wrap;
   justify-content: space-evenly;
   margin-top: 1rem;
-  margin-bottom: 1rem;
+  min-height: 100%;
+  height: auto !important;
+  height: 100%;
+  flex: 1;
+  padding-bottom: 3rem;
+             
 }
+
+.home  {
+      height: 100vh;
+      display: flex !important;
+      flex-direction: column;
+      justify-content: flex-start;
+      align-items: stretch;
+      align-content: stretch;
+    }
 
 html,
 body {
