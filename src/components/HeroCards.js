@@ -3,7 +3,7 @@ import SearchBar from "./SearchBar";
 import { Link } from "react-router-dom";
 import HeroPlaceholder from "./assets/hero-placeholder.jpg";
 import { useContext, useEffect, useState } from "react";
-import { SearchContext } from "../context/SearchContext";
+import { SearchContext } from "../store/SearchContext";
 
 function HeroCards({ defaultHeroes }) {
 
@@ -50,7 +50,7 @@ const [heroes, setHeroes] = useState([]);
         </Link>
     )) :
           <div className="no-heroes-found"><p>No heroes found. Try another search.</p></div>
-        }
+}
       </div>
     </div>)
 

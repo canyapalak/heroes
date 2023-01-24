@@ -1,30 +1,22 @@
+import { useContext } from "react";
 import { Link } from "react-router-dom";
+import { AuthContext } from "../store/AuthContext";
 
 function BurgerMenu() {
+
+  const { user } = useContext(AuthContext);
+
+    function logOut() {
+        userEvent.userName = ['']
+    }
   
   return (
     <nav role="navigation">
       <div id="menuToggle">
-        {/* <!-- */}
-        {/* A fake / hidden checkbox is used as click reciever,
-    so you can use the :checked selector on it.
-    --> */}
         <input type="checkbox" />
-
-        {/* <!-- */}
-        {/* Some spans to act as a hamburger.
-    
-    They are acting like a real hamburger,
-    not that McDonalds stuff.
-    --> */}
         <span></span>
         <span></span>
         <span></span>
-
-        {/* <!--
-    Too bad the menu has to be inside of the button
-    but hey, it's pure CSS magic.
-    --> */}
         <ul id="menu">
           <div className="home-icon-and-link">
             <i className="bi bi-house-door-fill" id="home-icon"></i>
@@ -34,13 +26,19 @@ function BurgerMenu() {
           </div>
           <div className="login-icon-and-link">
             <i className="bi bi-door-open-fill" id="login-icon"></i>
-                     <Link to="login">
-              <li>Log In</li>
-            </Link>
+            {user.userName ?
+              <Link to="/"
+              onClick = {logOut}>
+                <li>Log Out</li>
+              </Link>
+              :
+              <Link to="/login">
+                <li>Log In</li>
+              </Link>}
           </div>
           <div className="chatroom-icon-and-link">
             <i className="bi bi-chat-square-text-fill" id="chatroom-icon"></i>
-                    <Link to="/">
+                    <Link to="/chatroom">
               <li>Chat Room</li>
               </Link>
           </div>

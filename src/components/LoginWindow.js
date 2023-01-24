@@ -1,10 +1,25 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import Card from "react-bootstrap/Card";
 import Button from "react-bootstrap/Button";
-import Modal from 'react-bootstrap/Modal';
+import { AuthContext } from "../store/AuthContext";
+import userEvent from "@testing-library/user-event";
 
 
 function LoginWindow() {
+
+    const { login } = useContext(AuthContext);
+    const { handleUserNameChange } = useContext(AuthContext);
+    // const [loginInputValue, setLoginInputValue] = useState();
+    // const { fetchLoginInput, setFetchLoginInput} = useState(AuthContext)
+
+    // const handleChange = (e) => {
+    // setLoginInputValue(e.target.value)
+    // console.log('loginInputValue :>> ', loginInputValue);
+    // }
+
+    // const handleClick = () => {
+    // setFetchLoginInput(setLoginInputValue)
+    // }
     
     return (
         <React.Fragment>
@@ -15,7 +30,8 @@ function LoginWindow() {
                     type="text"
                     placeholder="Username"
                     className="login-input-bar"
-                    aria-label="Search" />
+                    aria-label="Search"
+                    onChange={handleUserNameChange} />
                 <div className="login-titles"><p>Password:</p></div>
                 <input
                     type="text"
@@ -24,10 +40,12 @@ function LoginWindow() {
                     aria-label="Search" />
                 <Button
                     variant="outline-success"
-                    className="login-button">Log In</Button>
+                    className="login-button"
+                    onClick={login}
+                >Log In</Button>
                 <hr id="login-line"/>
                 <div className="register-text"><p>You don't have an account?</p></div>
-                <hr/>
+                <br/>
                 <div className="register-welcome"><p>Create Your Account</p></div>
                 <div className="login-titles"><p>Username:</p></div>
                 <input

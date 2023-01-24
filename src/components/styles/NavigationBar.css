@@ -1,7 +1,6 @@
 .navbar {
     margin-top: -2rem;
     display: flex;
-    justify-content: space-between;
     flex-wrap: wrap;
     flex-direction: column;
 }
@@ -19,5 +18,23 @@
 
 #heroes-logo:hover {
     transform: scale(1.1)
+
 }
 
+.user-name-top-right {
+margin-right: 1rem;
+margin-left: auto;
+margin-top: -1.5rem;
+font-size: larger;
+display: flex;
+flex-wrap: wrap;
+}
+
+
+#welcome {
+    color: rgb(240, 238, 238);
+}
+
+#user-name {
+    color: #3dede1;
+}

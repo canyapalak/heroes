@@ -1,0 +1,94 @@
+.chatroom-container {
+    margin-right: 2rem;
+    margin-left: 2rem;
+    margin-bottom: 2rem;
+    padding-left: 1rem;
+    padding-right: 1rem;
+    font-size: 120%;
+    border: 3px solid rgb(230, 142, 55);
+    border-radius: 5px;
+    background: linear-gradient(90deg, rgb(9, 5, 15) 29%, rgb(72, 18, 86) 71%);
+
+}
+
+.comments-title {
+    color: rgb(224, 224, 53);
+    font-size: xx-large;
+    text-align: center;
+    padding-bottom: 2rem;
+}
+
+.be-comment-block {
+    padding: 3rem 4rem;
+    margin-top: 1rem;
+}
+
+.be-comment hr {
+    color: rgb(224, 224, 53);
+    background-color: rgb(224, 224, 53);
+    height: 0.2rem;
+    opacity: 70%;
+    margin-top: 2rem;
+}
+
+.be-comment-content span {
+    display: inline-block;
+    width: 49%;
+    margin-bottom: 0rem;
+    margin-top: 1rem;
+}
+
+.be-comment-name {
+    color: #3dede1;
+}
+
+.be-comment-time {
+    text-align: right;
+    color: #cbcbcb;
+}
+
+.be-comment-text {
+    color: rgb(9, 5, 15);
+    display: block;
+    background: rgb(247, 219, 242);
+    border: 1px solid rgb(9, 5, 15);
+    padding: 15px 20px 20px 20px;
+    border-radius: 10px;
+}
+
+.form-input {
+    color: rgb(9, 5, 15);
+    width: 100%;
+    height: 130px;
+    padding: 10px 20px 20px 20px;
+    margin-top: 1rem;
+    border: 1px solid rgb(9, 5, 15);
+    border-radius: 3px;
+    border-radius: 10px;
+}
+
+.chatroom-button {
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 1rem;
+    padding: 0px;
+    width: 15rem;
+    background-color: rgb(49, 11, 55);
+    height: 2.5rem;
+    border: 3px solid rgb(214, 126, 198);
+    border-radius: 7px;
+    font-size: x-large;
+    letter-spacing: 1px;
+    color: white;
+    text-decoration: none;
+}
+
+.chatroom-button:hover {
+    background-color: rgb(91, 62, 96) !important;
+    border: 3px solid rgb(214, 126, 198) !important;
+}
+
+.chatroom-button:active {
+    background-color: rgb(59, 47, 59) !important;
+    border: 3px solid rgb(214, 126, 198) !important;
+}

@@ -1,18 +1,24 @@
 import React, { useContext, useEffect } from "react";
 import { Link } from "react-router-dom";
 import HeroesLogo from "./assets/heroes-noback.png";
-import { SearchContext } from "../context/SearchContext";
+import { SearchContext } from "../store/SearchContext";
+import { AuthContext } from "../store/AuthContext";
 
 function NavigationBar() {
-  const { searchDispatch } = useContext(SearchContext);
+  // const { searchDispatch } = useContext(SearchContext);
 
-  const handleHomeClick = () => {
-    searchDispatch({ type: "reset" });
-  };
+  // const handleHomeClick = () => {
+  //   searchDispatch({ type: "reset" });
+  // };
+
+  const { user } = useContext(AuthContext);
 
   return (
     <div className="navbar">
-      <Link to="/" onClick={handleHomeClick}>
+      <div className="user-name-top-right"><p id="welcome">Welcome,&nbsp;</p>
+        <p id="user-name">{user.userName ? user.userName : "guest"}</p>
+      </div>
+      <Link to="/">
         <img src={HeroesLogo} alt="Logo" id="heroes-logo" />
       </Link>
     </div>
