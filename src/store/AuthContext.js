@@ -1,4 +1,5 @@
 import { createContext, useState } from "react"
+import { useNavigate } from "react-router-dom";
 
 // create context
 export const AuthContext = createContext();
@@ -20,14 +21,17 @@ export const AuthContextProvider = (props) => {
     // }
     // registerUserName()
 
+    const redirectTo = useNavigate();
+
     const [user, setUser] = useState({})
     
     const login = () => {
         setUser({
             userName: userNameInputValue,
-        })       
+        })
+        redirectTo("/")
     }
-    
+
     const [userNameInputValue, setUserNameInputValue] = useState(null)
     const handleUserNameChange = (e) => {
         setUserNameInputValue(e.target.value)

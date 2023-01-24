@@ -2,7 +2,6 @@ import React, { useContext, useState } from "react";
 import Card from "react-bootstrap/Card";
 import Button from "react-bootstrap/Button";
 import { AuthContext } from "../store/AuthContext";
-import userEvent from "@testing-library/user-event";
 
 
 function LoginWindow() {

@@ -8,6 +8,7 @@ import LoginPage from "./views/LoginPage";
 import { SearchContextProvider } from "./store/SearchContext";
 import { AuthContextProvider } from "./store/AuthContext";
 import ChatRoom from "./views/ChatRoom";
+import ProtectedRoute from "./routes/ProtectedRoute";
 
 function App() {
 
@@ -69,12 +70,15 @@ function App() {
       <AuthContextProvider>
       <SearchContextProvider>
       <Routes>
-        <Route path="/" element={<Home defaultHeroes={defaultHeroes} />} />
-        <Route path="/:id" element={<DetailsPage />} />
+            <Route path="/" element={<Home defaultHeroes={defaultHeroes} />} />
+            
+            <Route path="/:id" element={<ProtectedRoute>
+              <DetailsPage />
+            </ProtectedRoute>} />
+            
         <Route path="/login" element={<LoginPage />} />
         <Route path="/chatroom" element={<ChatRoom />} />
         <Route path="*" element={<NoMatch />} />
-            
         </Routes>
         </SearchContextProvider>
       </AuthContextProvider>

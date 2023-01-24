@@ -2,9 +2,12 @@
     background: rgb(198, 102, 181);
     background: linear-gradient(90deg, rgba(198, 102, 181, 1) 32%, rgb(170, 66, 149) 66%);
     font-size: larger;
+    left: 0;
+    bottom: 0;
     width: 100%;
     text-align: center;
     position: relative;
+    margin-top: auto !important;
     height: 7em;
 }
 
@@ -22,5 +25,5 @@
 
 #footer-flash {
     width: 3rem;
-    padding-top: 0.5rem;
+    margin-top: 0.5rem;
 }

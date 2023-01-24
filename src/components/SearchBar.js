@@ -9,8 +9,6 @@ function SearchBar({}) {
   const [inputValue, setInputValue] = useState('')
   // const [searchInput, setSearchInput] = useState([]); // let's set this state in the parent component
 
-  // const apiKey = "10159060549017724";
-
   // const fetchSearchedHeroes = async () => {
   //   const response = await fetch(
   //     `https://www.superheroapi.com/api.php/${apiKey}/search/${searchInput}`
@@ -31,7 +29,13 @@ function SearchBar({}) {
   const handleClick = () => {
 fetchSearchInput(inputValue)
   }
-  
+
+  const handleKeyDown = (event) => {
+    if (event.key === 'Enter') {
+      fetchSearchInput(inputValue)
+    }
+  }
+
   const { searchDispatch } = useContext(SearchContext);
 
   const handleHomeClick = () => {
@@ -47,6 +51,7 @@ fetchSearchInput(inputValue)
         className="input-bar"
         aria-label="Search"
         onChange={handleChange}
+        onKeyDown={handleKeyDown}
       />
       <Button
         variant="outline-success"

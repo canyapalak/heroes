@@ -1,9 +1,8 @@
 import React from "react";
 import { useContext } from "react";
 import { Navigate } from "react-router-dom";
-import userIsAuth from "../hooks/useIsAuth";
+import userIsAuth from "../hooks/userIsAuth";
 import { AuthContext } from "../store/AuthContext";
-import { isAuth } from "../utils/isAuth";
 
 function ProtectedRoute({ children }) {
   console.log("children", children);
@@ -17,7 +16,7 @@ function ProtectedRoute({ children }) {
   const isUser = userIsAuth();
 
     return <>
-        {isUser ? children : <Navigate to="/" />}
+        {isUser ? children : <Navigate to="/login" />}
     </>;
 }
 

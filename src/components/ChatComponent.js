@@ -8,7 +8,7 @@ function ChatComponent() {
 <>
 <div className="chatroom-container">
     <div className="be-comment-block">
-	    <h1 className="comments-title">Chat Room</h1>
+        <h1 className="comments-title">Chat Room</h1>
 	    <div className="be-comment">
 		    <div className="be-comment-content">
 				<span className="be-comment-name">
@@ -18,8 +18,8 @@ function ChatComponent() {
 					<p>Jan 11, 2023 at 3:34pm</p>
 				</span>
 			    <p className="be-comment-text">
-                What a great website it is! I can search any superhero and villain I want and
-                I can even check their stats to see who can beat whom.
+                What a great website! I can search any superhero and villain I want and
+                I can even check their stats to see who would beat whom.
 			    </p>
             </div>
             <hr/>           

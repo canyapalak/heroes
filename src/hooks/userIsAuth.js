@@ -5,7 +5,7 @@ import { AuthContext } from "../store/AuthContext";
 function userIsAuth() {
   const { user } = useContext(AuthContext);
 
-  const isUserAuthenticated = user !== null ? true : false;
+  const isUserAuthenticated = user.userName ? true : false;
 
   return isUserAuthenticated;
 }
