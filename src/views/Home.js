@@ -9,7 +9,7 @@ function Home({ defaultHeroes }) {
     <div className="home">
       <BurgerMenu />
       <NavigationBar />
-      <HeroCards defaultHeroes={defaultHeroes}/>
+      <HeroCards defaultHeroes={defaultHeroes} />
       <Footer />
     </div>
   );

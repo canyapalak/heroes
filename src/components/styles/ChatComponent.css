@@ -51,7 +51,7 @@
     color: rgb(9, 5, 15);
     display: block;
     background: rgb(247, 219, 242);
-    border: 1px solid rgb(9, 5, 15);
+    border: 3px solid rgb(214, 126, 198);
     padding: 15px 20px 20px 20px;
     border-radius: 10px;
 }
@@ -62,7 +62,7 @@
     height: 130px;
     padding: 10px 20px 20px 20px;
     margin-top: 1rem;
-    border: 1px solid rgb(9, 5, 15);
+    border: 3px solid rgb(214, 126, 198);
     border-radius: 3px;
     border-radius: 10px;
 }
@@ -91,4 +91,11 @@
 .chatroom-button:active {
     background-color: rgb(59, 47, 59) !important;
     border: 3px solid rgb(214, 126, 198) !important;
+}
+
+.comment-icons {
+    margin-top: -3.1rem;
+    float: right;
+    margin-right: 0.2rem;
+
 }

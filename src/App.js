@@ -9,9 +9,9 @@ import { SearchContextProvider } from "./store/SearchContext";
 import { AuthContextProvider } from "./store/AuthContext";
 import ChatRoom from "./views/ChatRoom";
 import ProtectedRoute from "./routes/ProtectedRoute";
+import Footer from "./components/Footer";
 
 function App() {
-
   // PREVIOUS FETCH WITH SEARCH ENDPOINT
 
   // const [heroes, setHeroes] = useState([]);
@@ -44,8 +44,8 @@ function App() {
         ).then((response) => response.json());
       })
     ).then((result) => {
-      console.log("result :>> ", result)
-      setDefaultHeroes(result)
+      console.log("result :>> ", result);
+      setDefaultHeroes(result);
     });
 
     // .then(function (responses) {
@@ -68,18 +68,21 @@ function App() {
   return (
     <div className="App">
       <AuthContextProvider>
-      <SearchContextProvider>
-      <Routes>
+        <SearchContextProvider>
+          <Routes>
             <Route path="/" element={<Home defaultHeroes={defaultHeroes} />} />
-            
-            <Route path="/:id" element={<ProtectedRoute>
-              <DetailsPage />
-            </ProtectedRoute>} />
-            
-        <Route path="/login" element={<LoginPage />} />
-        <Route path="/chatroom" element={<ChatRoom />} />
-        <Route path="*" element={<NoMatch />} />
-        </Routes>
+            <Route
+              path="/:id"
+              element={
+                <ProtectedRoute>
+                  <DetailsPage />
+                </ProtectedRoute>
+              }
+            />
+            <Route path="/login" element={<LoginPage />} />
+            <Route path="/chatroom" element={<ChatRoom />} />
+            <Route path="*" element={<NoMatch />} />
+          </Routes>
         </SearchContextProvider>
       </AuthContextProvider>
     </div>

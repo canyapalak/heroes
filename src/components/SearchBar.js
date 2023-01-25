@@ -4,9 +4,8 @@ import { Link } from "react-router-dom";
 import { SearchContext } from "../store/SearchContext";
 
 function SearchBar({}) {
-  
-  const { searchResult, fetchSearchInput} = useContext(SearchContext)
-  const [inputValue, setInputValue] = useState('')
+  const { searchResult, fetchSearchInput } = useContext(SearchContext);
+  const [inputValue, setInputValue] = useState("");
   // const [searchInput, setSearchInput] = useState([]); // let's set this state in the parent component
 
   // const fetchSearchedHeroes = async () => {
@@ -17,31 +16,30 @@ function SearchBar({}) {
   //   console.log("Async result: ", result);
   //   setSearchedHeroes(result.results);
   // };
-//   const submitInput = (e) => {
-// e.preventDefault()
-// getInput(e.target.value)
-//   }
+  //   const submitInput = (e) => {
+  // e.preventDefault()
+  // getInput(e.target.value)
+  //   }
   const handleChange = (e) => {
-    setInputValue(e.target.value)
-    // console.log('inputValue :>> ', inputValue);
-  }
+    setInputValue(e.target.value.toLowerCase());
+    console.log("inputValue :>> ", inputValue);
+  };
 
   const handleClick = () => {
-fetchSearchInput(inputValue)
-  }
+    fetchSearchInput(inputValue);
+  };
 
   const handleKeyDown = (event) => {
-    if (event.key === 'Enter') {
-      fetchSearchInput(inputValue)
+    if (event.key === "Enter") {
+      fetchSearchInput(inputValue);
     }
-  }
+  };
 
   const { searchDispatch } = useContext(SearchContext);
 
   const handleHomeClick = () => {
     searchDispatch({ type: "reset" });
   };
-    
 
   return (
     <div className="d-flex" id="bar-and-button">
@@ -58,16 +56,12 @@ fetchSearchInput(inputValue)
         className="search-button"
         onClick={handleClick}
       >
-
         Go!
       </Button>
-        <Link to="/" onClick={handleHomeClick}>
-      <Button
-        variant="outline-success"
-        className="search-button"
-      >
-        Reset
-      </Button>
+      <Link to="/" onClick={handleHomeClick}>
+        <Button variant="outline-success" className="search-button">
+          Reset
+        </Button>
       </Link>
 
       {/* {console.log('searchResult', searchResult)} */}

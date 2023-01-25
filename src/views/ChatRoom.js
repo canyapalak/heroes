@@ -5,16 +5,14 @@ import Footer from "../components/Footer";
 import NavigationBar from "../components/NavigationBar";
 
 function ChatRoom() {
-
-    return (
-        <div div className="chat-room">
-            <BurgerMenu />
-            <NavigationBar />
-            <ChatComponent />
-            <Footer />
-        </div>
-    )
-    
+  return (
+    <div div className="chat-room">
+      <BurgerMenu />
+      <NavigationBar />
+      <ChatComponent />
+      <Footer />
+    </div>
+  );
 }
 
-export default ChatRoom
+export default ChatRoom;
