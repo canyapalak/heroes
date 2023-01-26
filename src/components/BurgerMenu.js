@@ -1,13 +1,15 @@
 import { useContext } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { AuthContext } from "../store/AuthContext";
 
 function BurgerMenu() {
-  const { user } = useContext(AuthContext);
+  // const { registerUser } = useContext(AuthContext);
+  const redirectTo = useNavigate();
 
-  function logOut() {
-    userEvent.userName = [""];
-  }
+  // function logOut() {
+  //   registerUser.email = "";
+  //   redirectTo("/");
+  // }
 
   return (
     <nav role="navigation">
@@ -25,7 +27,11 @@ function BurgerMenu() {
           </div>
           <div className="login-icon-and-link">
             <i className="bi bi-door-open-fill" id="login-icon"></i>
-            {user.userName ? (
+            <Link to="/login">
+              <li>Log In</li>
+            </Link>
+
+            {/* {registerUser.email ? (
               <Link to="/" onClick={logOut}>
                 <li>Log Out</li>
               </Link>
@@ -33,7 +39,7 @@ function BurgerMenu() {
               <Link to="/login">
                 <li>Log In</li>
               </Link>
-            )}
+            )} */}
           </div>
           <div className="chatroom-icon-and-link">
             <i className="bi bi-chat-square-text-fill" id="chatroom-icon"></i>

@@ -9,7 +9,7 @@ function ChatComponent() {
     useContext(AuthContext);
   const redirectTo = useNavigate();
 
-  const isUser = userIsAuth();
+  // const isUser = userIsAuth();
 
   return (
     <>

@@ -1,13 +1,13 @@
-import React from "react";
-import { useContext } from "react";
-import { AuthContext } from "../store/AuthContext";
+// import React from "react";
+// import { useContext } from "react";
+// import { AuthContext } from "../store/AuthContext";
 
-function userIsAuth() {
-  const { user } = useContext(AuthContext);
+// function userIsAuth() {
+//   const { registerUser } = useContext(AuthContext);
 
-  const isUserAuthenticated = user.userName ? true : false;
+//   const isUserAuthenticated = registerUser.email ? true : false;
 
-  return isUserAuthenticated;
-}
+//   return isUserAuthenticated;
+// }
 
-export default userIsAuth;
+// export default userIsAuth;

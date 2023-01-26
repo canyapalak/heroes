@@ -26,7 +26,7 @@
     padding-top: 1rem;
 }
 
-.login-input-bar {
+.email-input {
     width: 15rem;
     height: 2.5rem;
     border: 3px solid rgb(214, 126, 198);
@@ -34,6 +34,17 @@
     font-size: x-large;
     letter-spacing: 1px;
     padding: 8px;
+}
+
+.password-input {
+    width: 15rem;
+    height: 2.5rem;
+    border: 3px solid rgb(214, 126, 198);
+    border-radius: 7px;
+    font-size: x-large;
+    letter-spacing: 1px;
+    padding: 8px;
+    -webkit-text-security: disc;
 }
 
 .login-input-bar:focus {

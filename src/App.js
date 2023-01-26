@@ -9,7 +9,7 @@ import { SearchContextProvider } from "./store/SearchContext";
 import { AuthContextProvider } from "./store/AuthContext";
 import ChatRoom from "./views/ChatRoom";
 import ProtectedRoute from "./routes/ProtectedRoute";
-import Footer from "./components/Footer";
+import { app } from "./config/FirebaseConfig";
 
 function App() {
   // PREVIOUS FETCH WITH SEARCH ENDPOINT
@@ -47,6 +47,8 @@ function App() {
       console.log("result :>> ", result);
       setDefaultHeroes(result);
     });
+
+    console.log("app :>> ", app);
 
     // .then(function (responses) {
     //   console.log("responses :>> ", responses);

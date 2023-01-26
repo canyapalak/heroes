@@ -2,11 +2,26 @@ import React, { useContext, useState } from "react";
 import Card from "react-bootstrap/Card";
 import Button from "react-bootstrap/Button";
 import { AuthContext } from "../store/AuthContext";
+// import userIsAuth from "../hooks/userIsAuth";
 
 function LoginWindow() {
-  const { login } = useContext(AuthContext);
-  const { handleUserNameChange, handlePasswordChange } =
-    useContext(AuthContext);
+  // const isUser = userIsAuth();
+
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const { register } = useContext(AuthContext);
+
+  const handleEmailChange = (e) => {
+    setEmail(e.target.value);
+  };
+
+  const handlePasswordChange = (e) => {
+    setPassword(e.target.value);
+  };
+
+  const handleRegister = () => {
+    register(email, password);
+  };
 
   return (
     <React.Fragment>
@@ -15,23 +30,17 @@ function LoginWindow() {
           <p>Log In to Your Account</p>
         </div>
         <div className="login-titles">
-          <p>Username:</p>
+          <p>E-mail Address:</p>
         </div>
         <input
           type="text"
-          placeholder="Username"
-          className="login-input-bar"
-          aria-label="Search"
+          placeholder="E-mail Address"
+          className="email-input"
         />
         <div className="login-titles">
           <p>Password:</p>
         </div>
-        <input
-          type="text"
-          placeholder="Password"
-          className="login-input-bar"
-          aria-label="Search"
-        />
+        <input type="text" placeholder="Password" className="password-input" />
         <Button variant="outline-success" className="login-button">
           Log In
         </Button>
@@ -44,13 +53,13 @@ function LoginWindow() {
           <p>Create Your Account</p>
         </div>
         <div className="login-titles">
-          <p>Username:</p>
+          <p>E-mail Address:</p>
         </div>
         <input
           type="text"
-          placeholder="Username"
-          className="login-input-bar"
-          onChange={handleUserNameChange}
+          placeholder="E-mail Address"
+          className="email-input"
+          onChange={handleEmailChange}
         />
         <div className="login-titles">
           <p>Password:</p>
@@ -58,11 +67,11 @@ function LoginWindow() {
         <input
           type="text"
           placeholder="Password"
-          className="login-input-bar"
+          className="password-input"
           onChange={handlePasswordChange}
         />
         <Button
-          onClick={login}
+          onClick={handleRegister}
           variant="outline-success"
           className="login-button"
         >

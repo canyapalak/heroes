@@ -1,47 +1,83 @@
 import { createContext, useState } from "react";
-import { useNavigate } from "react-router-dom";
-import userIsAuth from "../hooks/userIsAuth";
+import { createUserWithEmailAndPassword } from "firebase/auth";
+// import { useNavigate } from "react-router-dom";
 import trash from "../components/assets/trash.png";
 import pencil from "../components/assets/pencil.png";
+import { useNavigate } from "react-router-dom";
+import { auth } from "../config/FirebaseConfig";
 
 // create context
 export const AuthContext = createContext();
 
 //create the store
 export const AuthContextProvider = (props) => {
-  const redirectTo = useNavigate();
   const [user, setUser] = useState({});
-  const [password, setPassword] = useState({});
+  const redirectTo = useNavigate();
 
-  const login = (e) => {
-    console.log("user, password", userNameInputValue, passwordInputValue);
-    if (passwordInputValue.length < 4 || passwordInputValue.length > 10) {
-      alert("Password is not valid") && e.preventDefault();
+  const register = async (email, password) => {
+    console.log("email, password :>> ", email, password);
+    try {
+      const userCredential = await createUserWithEmailAndPassword(
+        auth,
+        email,
+        password
+      );
+
+      const user = userCredential.user;
+      console.log("user :>> ", user);
+      setUser(userCredential.user);
+    } catch (error) {
+      console.log("error", error);
+      const errorCode = error.code;
+      const errorMessage = error.message;
     }
-    if (userNameInputValue.length < 4 || userNameInputValue.length > 10) {
-      alert("User name is not valid") && e.preventDefault();
-    }
-
-    setUser({
-      userName: userNameInputValue,
-    });
-    setPassword({
-      passwordText: passwordInputValue,
-    });
-    redirectTo("/");
   };
 
-  const [passwordInputValue, setPasswordInputValue] = useState(null);
-  const handlePasswordChange = (e) => {
-    setPasswordInputValue(e.target.value);
-    // console.log('inputValue :>> ', inputValue);
-  };
+  // createUserWithEmailAndPassword(auth, email, password)
+  //   .then((userCredential) => {
+  //     // Signed in
+  //     const user = userCredential.user;
+  //     // ...
+  //   })
+  //   .catch((error) => {
+  //     const errorCode = error.code;
+  //     const errorMessage = error.message;
+  //     // ..
+  //   });
 
-  const [userNameInputValue, setUserNameInputValue] = useState(null);
-  const handleUserNameChange = (e) => {
-    setUserNameInputValue(e.target.value);
-    // console.log('inputValue :>> ', inputValue);
-  };
+  // const [email, setEmail] = useState(null);
+  // const [password, setPassword] = useState(null);
+
+  // const handleEmailChange = (e) => {
+  //   setEmail(e.target.value);
+  // };
+
+  // const handlePasswordChange = (e) => {
+  //   setPassword(e.target.value);
+  // };
+
+  // ----old codes----
+
+  // const redirectTo = useNavigate();
+  // const [registerUser, setRegisterUser] = useState({});
+
+  // const login = (e) => {
+  //   if (password.length < 4 || password.length > 10) {
+  //     alert("Password should contain 4-10 characters.") && e.preventDefault();
+  //   }
+  //   if (email.length < 4 || email.length > 20) {
+  //     alert("E-mail address should contain 4-20 characters.") &&
+  //       e.preventDefault();
+  //   }
+
+  //   console.log("registerUser :>> ", registerUser);
+
+  //   setRegisterUser({
+  //     email: email,
+  //     password: password,
+  //   });
+  //   redirectTo("/");
+  // };
 
   const [commentInput, setCommentInput] = useState(null);
   const handleCommentInput = (e) => {
@@ -52,11 +88,11 @@ export const AuthContextProvider = (props) => {
   const postComment = () => {
     setCommentText(commentInput);
 
-    return user.userName ? (
+    return registerUser.userName ? (
       <div className="be-comment">
         <div className="be-comment-content">
           <span className="be-comment-name">
-            <p>{user.userName}</p>
+            <p>{registerUser.userName}</p>
           </span>
           <span className="be-comment-time">
             <p>Jan 11, 2023 at 3:34pm</p>
@@ -77,12 +113,7 @@ export const AuthContextProvider = (props) => {
   return (
     <AuthContext.Provider
       value={{
-        login,
-        user,
-        handleUserNameChange,
-        password,
-        handlePasswordChange,
-        commentText,
+        register,
         postComment,
         handleCommentInput,
       }}
