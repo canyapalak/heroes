@@ -1,7 +1,7 @@
 import React, { useContext } from "react";
 import { Button } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
-import userIsAuth from "../hooks/userIsAuth";
+// import userIsAuth from "../hooks/userIsAuth";
 import { AuthContext } from "../store/AuthContext";
 
 function ChatComponent() {
