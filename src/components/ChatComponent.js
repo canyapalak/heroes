@@ -1,15 +1,12 @@
 import React, { useContext } from "react";
 import { Button } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
-// import userIsAuth from "../hooks/userIsAuth";
 import { AuthContext } from "../store/AuthContext";
 
 function ChatComponent() {
   const { handleCommentInput, postComment, commentText, user } =
     useContext(AuthContext);
   const redirectTo = useNavigate();
-
-  // const isUser = userIsAuth();
 
   return (
     <>

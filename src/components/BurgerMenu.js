@@ -1,14 +1,23 @@
-import { useContext } from "react";
+import { useContext, useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { AuthContext } from "../store/AuthContext";
 
 function BurgerMenu() {
-  // const { registerUser } = useContext(AuthContext);
   const redirectTo = useNavigate();
-  const { user } = useContext(AuthContext);
+  const { user, setUser } = useContext(AuthContext);
+  const [active, setActive] = useState(false);
+
+  useEffect(() => {
+    console.log("user", user);
+    if (user) {
+      setActive(true);
+    } else {
+      setActive(false);
+    }
+  }, [user]);
 
   function logOut() {
-    user.email = "";
+    setUser("");
     redirectTo("/");
   }
 
@@ -28,7 +37,7 @@ function BurgerMenu() {
           </div>
           <div className="login-icon-and-link">
             <i className="bi bi-door-open-fill" id="login-icon"></i>
-            {user.email ? (
+            {active ? (
               <Link to="/" onClick={logOut}>
                 <li>Log Out</li>
               </Link>

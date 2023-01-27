@@ -1,9 +1,7 @@
 import { createContext, useState } from "react";
 import { createUserWithEmailAndPassword } from "firebase/auth";
-// import { useNavigate } from "react-router-dom";
 import trash from "../components/assets/trash.png";
 import pencil from "../components/assets/pencil.png";
-import { useNavigate } from "react-router-dom";
 import { auth } from "../config/FirebaseConfig";
 
 // create context
@@ -11,17 +9,17 @@ export const AuthContext = createContext();
 
 //create the store
 export const AuthContextProvider = (props) => {
-  const [user, setUser] = useState({});
+  const [user, setUser] = useState("");
   const [error, setError] = useState({});
-  const redirectTo = useNavigate();
+  const [isEmailInUse, setIsEmailInUse] = useState(false);
 
-  const register = async (email, password) => {
-    console.log("email, password :>> ", email, password);
+  const register = async (registerEmail, registerPassword) => {
+    console.log("email, password :>> ", registerEmail, registerPassword);
     try {
       const userCredential = await createUserWithEmailAndPassword(
         auth,
-        email,
-        password
+        registerEmail,
+        registerPassword
       );
 
       const user = userCredential.user;
@@ -29,14 +27,14 @@ export const AuthContextProvider = (props) => {
       setUser(userCredential.user);
     } catch (error) {
       console.log("error", error);
-      if (error.message.includes("email-already-in-use")) {
-        alert("you already have an account");
+      const errorMessage = error.message;
+      if (errorMessage.includes("email-already-in-use")) {
+        setIsEmailInUse(true);
+      } else {
+        setIsEmailInUse(false);
       }
-      if (error.message.includes("invalid-email")) {
-        alert("invalid e-mail");
-      }
-      // const errorMessage = error.message;
     }
+    // const errorMessage = error.message;
   };
 
   // createUserWithEmailAndPassword(auth, email, password)
@@ -120,7 +118,10 @@ export const AuthContextProvider = (props) => {
     <AuthContext.Provider
       value={{
         register,
+        isEmailInUse,
+        setIsEmailInUse,
         user,
+        setUser,
         error,
         postComment,
         handleCommentInput,
