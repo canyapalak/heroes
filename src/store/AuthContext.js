@@ -12,6 +12,7 @@ export const AuthContext = createContext();
 //create the store
 export const AuthContextProvider = (props) => {
   const [user, setUser] = useState({});
+  const [error, setError] = useState({});
   const redirectTo = useNavigate();
 
   const register = async (email, password) => {
@@ -28,8 +29,13 @@ export const AuthContextProvider = (props) => {
       setUser(userCredential.user);
     } catch (error) {
       console.log("error", error);
-      const errorCode = error.code;
-      const errorMessage = error.message;
+      if (error.message.includes("email-already-in-use")) {
+        alert("you already have an account");
+      }
+      if (error.message.includes("invalid-email")) {
+        alert("invalid e-mail");
+      }
+      // const errorMessage = error.message;
     }
   };
 
@@ -88,32 +94,34 @@ export const AuthContextProvider = (props) => {
   const postComment = () => {
     setCommentText(commentInput);
 
-    return registerUser.userName ? (
-      <div className="be-comment">
-        <div className="be-comment-content">
-          <span className="be-comment-name">
-            <p>{registerUser.userName}</p>
-          </span>
-          <span className="be-comment-time">
-            <p>Jan 11, 2023 at 3:34pm</p>
-          </span>
-          <p className="be-comment-text">{commentText}</p>
-          <div className="comment-icons">
-            <img src={pencil} alt="Edit" id="pencil"></img>
-            <img src={trash} alt="Delete" id="trash"></img>
-          </div>
-        </div>
-        <hr />
-      </div>
-    ) : (
-      redirectTo("/login")
-    );
+    // return user.email ? (
+    //   <div className="be-comment">
+    //     <div className="be-comment-content">
+    //       <span className="be-comment-name">
+    //         <p>{user.email}</p>
+    //       </span>
+    //       <span className="be-comment-time">
+    //         <p>Jan 11, 2023 at 3:34pm</p>
+    //       </span>
+    //       <p className="be-comment-text">{commentText}</p>
+    //       <div className="comment-icons">
+    //         <img src={pencil} alt="Edit" id="pencil"></img>
+    //         <img src={trash} alt="Delete" id="trash"></img>
+    //       </div>
+    //     </div>
+    //     <hr />
+    //   </div>
+    // ) : (
+    //   redirectTo("/login")
+    // );
   };
 
   return (
     <AuthContext.Provider
       value={{
         register,
+        user,
+        error,
         postComment,
         handleCommentInput,
       }}

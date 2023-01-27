@@ -44,11 +44,10 @@ function App() {
         ).then((response) => response.json());
       })
     ).then((result) => {
-      console.log("result :>> ", result);
       setDefaultHeroes(result);
     });
 
-    console.log("app :>> ", app);
+    // console.log("app :>> ", app);
 
     // .then(function (responses) {
     //   console.log("responses :>> ", responses);

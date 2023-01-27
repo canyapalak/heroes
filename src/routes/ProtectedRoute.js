@@ -1,7 +1,7 @@
 import React from "react";
 import { useContext } from "react";
 import { Navigate } from "react-router-dom";
-import userIsAuth from "../hooks/userIsAuth";
+// import userIsAuth from "../hooks/userIsAuth";
 import { AuthContext } from "../store/AuthContext";
 
 function ProtectedRoute({ children }) {
@@ -9,9 +9,9 @@ function ProtectedRoute({ children }) {
 
   const { user } = useContext(AuthContext);
 
-  const isUser = userIsAuth();
+  // const isUser = userIsAuth();
 
-  return <>{isUser ? children : <Navigate to="/login" />}</>;
+  return <>{user.email ? children : <Navigate to="/login" />}</>;
 }
 
 export default ProtectedRoute;

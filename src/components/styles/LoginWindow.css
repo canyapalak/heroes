@@ -102,3 +102,19 @@
     opacity: 70%;
     margin-top: 3rem;
 }
+
+.login-titles {
+    margin-bottom: -1rem;
+    justify-content: center;
+}
+
+.title-input-error {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.small-red-errors {
+    margin-right: auto;
+    font-size:medium;
+    color: tomato;
+}

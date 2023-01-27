@@ -3,9 +3,10 @@
 // import { AuthContext } from "../store/AuthContext";
 
 // function userIsAuth() {
-//   const { registerUser } = useContext(AuthContext);
+//   const { user } = useContext(AuthContext);
 
-//   const isUserAuthenticated = registerUser.email ? true : false;
+//   const isUserAuthenticated = user.email ? true : false;
+//   console.log("user.email :>> ", user.email);
 
 //   return isUserAuthenticated;
 // }

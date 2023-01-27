@@ -4,14 +4,13 @@ import HeroesLogo from "./assets/heroes-noback.png";
 import { AuthContext } from "../store/AuthContext";
 
 function NavigationBar() {
-  // const { registerUser } = useContext(AuthContext);
-  // const isUser = userIsAuth();
+  const { user } = useContext(AuthContext);
 
   return (
     <div className="navbar">
       <div className="user-name-top-right">
         <p id="welcome">Welcome,&nbsp;</p>
-        <p id="user-name">"guest"</p>
+        <p id="user-name">{user.email ? user.email : "guest"}</p>
       </div>
       <Link to="/">
         <img src={HeroesLogo} alt="Logo" id="heroes-logo" />

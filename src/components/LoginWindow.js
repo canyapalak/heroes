@@ -2,6 +2,7 @@ import React, { useContext, useState } from "react";
 import Card from "react-bootstrap/Card";
 import Button from "react-bootstrap/Button";
 import { AuthContext } from "../store/AuthContext";
+import { useNavigate } from "react-router-dom";
 // import userIsAuth from "../hooks/userIsAuth";
 
 function LoginWindow() {
@@ -10,18 +11,38 @@ function LoginWindow() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const { register } = useContext(AuthContext);
+  const { user } = useContext(AuthContext);
+  const redirectTo = useNavigate();
+  const { error } = useContext(AuthContext);
+
+  const [isEmailValid, setIsEmailValid] = useState(true);
+  const [isPasswordValid, setIsPasswordValid] = useState(true);
 
   const handleEmailChange = (e) => {
     setEmail(e.target.value);
+    if (!email.includes("@") || !email.includes(".")) {
+      setIsEmailValid(false);
+    } else {
+      setIsEmailValid(true);
+    }
   };
 
   const handlePasswordChange = (e) => {
     setPassword(e.target.value);
+    if (password.length < 6) {
+      setIsPasswordValid(false);
+    } else {
+      setIsPasswordValid(true);
+    }
   };
 
-  const handleRegister = () => {
+  console.log("user.email :>> ", user.email);
+
+  function handleRegister() {
     register(email, password);
-  };
+    console.log("error.message :>> ", error.message);
+    console.log("error.code :>> ", error.code);
+  }
 
   return (
     <React.Fragment>
@@ -52,24 +73,50 @@ function LoginWindow() {
         <div className="register-welcome">
           <p>Create Your Account</p>
         </div>
-        <div className="login-titles">
-          <p>E-mail Address:</p>
+        <div className="title-input-error">
+          <div className="login-titles">
+            <p>E-mail Address:</p>
+          </div>
+          <input
+            type="text"
+            placeholder="E-mail Address"
+            className="email-input"
+            onChange={handleEmailChange}
+          />
+          {isEmailValid ? (
+            <div className="small-red-errors">
+              <p>
+                <br></br>
+              </p>
+            </div>
+          ) : (
+            <div className="small-red-errors">
+              <p>Invalid E-mail Address</p>
+            </div>
+          )}
         </div>
-        <input
-          type="text"
-          placeholder="E-mail Address"
-          className="email-input"
-          onChange={handleEmailChange}
-        />
-        <div className="login-titles">
-          <p>Password:</p>
+        <div className="title-input-error">
+          <div className="login-titles">
+            <p>Password:</p>
+          </div>
+          <input
+            type="text"
+            placeholder="Password"
+            className="password-input"
+            onChange={handlePasswordChange}
+          />
+          {isPasswordValid ? (
+            <div className="small-red-errors">
+              <p>
+                <br></br>
+              </p>
+            </div>
+          ) : (
+            <div className="small-red-errors">
+              <p>Minimum 6 characters</p>
+            </div>
+          )}
         </div>
-        <input
-          type="text"
-          placeholder="Password"
-          className="password-input"
-          onChange={handlePasswordChange}
-        />
         <Button
           onClick={handleRegister}
           variant="outline-success"
