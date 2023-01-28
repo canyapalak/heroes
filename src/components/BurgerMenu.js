@@ -8,7 +8,6 @@ function BurgerMenu() {
   const [active, setActive] = useState(false);
 
   useEffect(() => {
-    console.log("user", user);
     if (user) {
       setActive(true);
     } else {

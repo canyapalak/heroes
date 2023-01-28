@@ -27,7 +27,7 @@ function App() {
   // FETCH SPECIFIC HEROES WITH PROMISE.ALL
 
   const [defaultHeroes, setDefaultHeroes] = useState([]);
-  const ids = [70, 620, 644, 332, 720, 659];
+  const ids = [70, 620, 644, 332, 638, 717];
   useEffect(() => {
     // Promise.all([
     //   fetch(`https://www.superheroapi.com/api.php/${apiKey}/70`),
