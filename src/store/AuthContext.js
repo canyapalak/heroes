@@ -1,8 +1,10 @@
 import { createContext, useState } from "react";
 import { createUserWithEmailAndPassword } from "firebase/auth";
+import { signInWithEmailAndPassword } from "firebase/auth";
 import trash from "../components/assets/trash.png";
 import pencil from "../components/assets/pencil.png";
 import { auth } from "../config/FirebaseConfig";
+import { registerVersion } from "firebase/app";
 
 // create context
 export const AuthContext = createContext();
@@ -12,14 +14,17 @@ export const AuthContextProvider = (props) => {
   const [user, setUser] = useState("");
   const [error, setError] = useState({});
   const [isEmailInUse, setIsEmailInUse] = useState(false);
+  const [isEmailNotFound, setIsEmailNotFound] = useState(false);
+  const [isPasswordWrong, setIsPasswordWrong] = useState(false);
 
-  const register = async (registerEmail, registerPassword) => {
-    console.log("email, password :>> ", registerEmail, registerPassword);
+  //firebase sign up
+  const register = async (email, password) => {
+    console.log("email, password :>> ", email, password);
     try {
       const userCredential = await createUserWithEmailAndPassword(
         auth,
-        registerEmail,
-        registerPassword
+        email,
+        password
       );
 
       const user = userCredential.user;
@@ -34,97 +39,49 @@ export const AuthContextProvider = (props) => {
         setIsEmailInUse(false);
       }
     }
-    // const errorMessage = error.message;
   };
 
-  // createUserWithEmailAndPassword(auth, email, password)
-  //   .then((userCredential) => {
-  //     // Signed in
-  //     const user = userCredential.user;
-  //     // ...
-  //   })
-  //   .catch((error) => {
-  //     const errorCode = error.code;
-  //     const errorMessage = error.message;
-  //     // ..
-  //   });
-
-  // const [email, setEmail] = useState(null);
-  // const [password, setPassword] = useState(null);
-
-  // const handleEmailChange = (e) => {
-  //   setEmail(e.target.value);
-  // };
-
-  // const handlePasswordChange = (e) => {
-  //   setPassword(e.target.value);
-  // };
-
-  // ----old codes----
-
-  // const redirectTo = useNavigate();
-  // const [registerUser, setRegisterUser] = useState({});
-
-  // const login = (e) => {
-  //   if (password.length < 4 || password.length > 10) {
-  //     alert("Password should contain 4-10 characters.") && e.preventDefault();
-  //   }
-  //   if (email.length < 4 || email.length > 20) {
-  //     alert("E-mail address should contain 4-20 characters.") &&
-  //       e.preventDefault();
-  //   }
-
-  //   console.log("registerUser :>> ", registerUser);
-
-  //   setRegisterUser({
-  //     email: email,
-  //     password: password,
-  //   });
-  //   redirectTo("/");
-  // };
-
-  const [commentInput, setCommentInput] = useState(null);
-  const handleCommentInput = (e) => {
-    setCommentInput(e.target.value);
-  };
-
-  const [commentText, setCommentText] = useState();
-  const postComment = () => {
-    setCommentText(commentInput);
-
-    // return user.email ? (
-    //   <div className="be-comment">
-    //     <div className="be-comment-content">
-    //       <span className="be-comment-name">
-    //         <p>{user.email}</p>
-    //       </span>
-    //       <span className="be-comment-time">
-    //         <p>Jan 11, 2023 at 3:34pm</p>
-    //       </span>
-    //       <p className="be-comment-text">{commentText}</p>
-    //       <div className="comment-icons">
-    //         <img src={pencil} alt="Edit" id="pencil"></img>
-    //         <img src={trash} alt="Delete" id="trash"></img>
-    //       </div>
-    //     </div>
-    //     <hr />
-    //   </div>
-    // ) : (
-    //   redirectTo("/login")
-    // );
+  //firebase login
+  const login = async (email, password) => {
+    try {
+      const userCredential = await signInWithEmailAndPassword(
+        auth,
+        email,
+        password
+      );
+      const user = userCredential.user;
+      console.log("user :>> ", user);
+      setUser(userCredential.user);
+    } catch (error) {
+      console.log("error", error);
+      const errorMessage = error.message;
+      if (errorMessage.includes("wrong-password")) {
+        setIsPasswordWrong(true);
+      } else {
+        setIsPasswordWrong(false);
+      }
+      if (errorMessage.includes("user-not-found")) {
+        setIsEmailNotFound(true);
+      } else {
+        setIsEmailNotFound(false);
+      }
+    }
   };
 
   return (
     <AuthContext.Provider
       value={{
         register,
+        login,
         isEmailInUse,
         setIsEmailInUse,
+        isEmailNotFound,
+        setIsEmailNotFound,
+        isPasswordWrong,
+        setIsPasswordWrong,
         user,
         setUser,
         error,
-        postComment,
-        handleCommentInput,
       }}
     >
       {props.children}

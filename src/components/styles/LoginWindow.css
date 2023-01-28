@@ -53,7 +53,6 @@
 }
 
 .login-button{
-    margin-top: 1rem;
     padding: 0px;
     width: 5rem;
     background-color: rgb(49, 11, 55);
@@ -63,6 +62,7 @@
     font-size: x-large;
     letter-spacing: 1px;
     color: white;    
+    margin-top: 1rem;
 }
     
 .login-button:hover {
@@ -71,6 +71,28 @@
 }
     
 .login-button:active {
+    background-color: rgb(59, 47, 59) !important;
+    border: 3spx solid rgb(214, 126, 198) !important;
+}
+
+.register-button {
+    padding: 0px;
+    width: 5rem;
+    background-color: rgb(49, 11, 55);
+    height: 2.5rem;
+    border: 3px solid rgb(214, 126, 198);
+    border-radius: 7px;
+    font-size: x-large;
+    letter-spacing: 1px;
+    color: white;
+}
+
+.register-button:hover {
+    background-color: rgb(91, 62, 96) !important;
+    border: 3px solid rgb(214, 126, 198) !important;
+}
+
+.register-button:active {
     background-color: rgb(59, 47, 59) !important;
     border: 3spx solid rgb(214, 126, 198) !important;
 }
@@ -113,8 +135,62 @@
     flex-direction: column;
     align-items: center;
 }
+
+.title-input-error-register-password{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+}
+
+.title-input-error-login-password {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: -1rem;
+}
+
+.login-titles-password {
+    margin-bottom: -1rem;
+}
+
+
 .small-red-errors {
     margin-right: auto;
     font-size:medium;
+    color: tomato;
+}
+
+.small-red-errors-two-errors {
+    display: flex;
+    flex-direction: column;
+    margin-right: auto;
+    font-size: medium;
+    color: tomato;
+}
+
+#invalid-email {
+    margin-right: auto;
+    font-size: medium;
+    color: tomato;
+    margin-bottom: -0.2rem;
+}
+
+#email-in-use {
+    margin-right: auto;
+    font-size: medium;
+    color: tomato;
+}
+
+#invalid-password {
+    margin-right: auto;
+    font-size: medium;
+    color: tomato;
+    margin-bottom: -0.2rem;
+}
+
+#password-is-wrong {
+    margin-right: auto;
+    font-size: medium;
     color: tomato;
 }

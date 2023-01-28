@@ -13,16 +13,25 @@ function LoginWindow() {
   const [isRegisterPasswordValid, setIsRegisterPasswordValid] = useState(true);
   const [isLoginEmailValid, setIsLoginEmailValid] = useState(true);
   const [isLoginPasswordValid, setIsLoginPasswordValid] = useState(true);
-  const { register, user, error, isEmailInUse, setIsEmailInUse } =
-    useContext(AuthContext);
+  const {
+    register,
+    login,
+    user,
+    error,
+    isEmailInUse,
+    setIsEmailInUse,
+    isPasswordWrong,
+    setIsPasswordWrong,
+    isEmailNotFound,
+    setIsEmailNotFound,
+  } = useContext(AuthContext);
   const redirectTo = useNavigate();
 
+  //register hooks
   useEffect(() => {
     checkRegisterPassword();
-    console.log("user :>> ", user);
     if (user) {
       redirectTo("/");
-      console.log("user :>> ", user);
     }
   }, [registerPassword, user]);
 
@@ -30,13 +39,35 @@ function LoginWindow() {
     checkRegisterEmail();
   }, [registerEmail]);
 
+  //login hooks
+  useEffect(() => {
+    checkLoginPassword();
+    if (user) {
+      redirectTo("/");
+      console.log("user :>> ", user);
+    }
+  }, [loginPassword, user]);
+
+  useEffect(() => {
+    checkLoginEmail();
+  }, [loginEmail]);
+
+  useEffect(() => {
+    checkLoginPassword();
+  }, [loginPassword]);
+
+  //page refresh
   useEffect(() => {
     setIsEmailInUse(false);
     setIsRegisterPasswordValid(true);
     setIsRegisterEmailValid(true);
     setIsLoginEmailValid(true);
     setIsLoginPasswordValid(true);
+    setIsEmailNotFound(false);
+    setIsPasswordWrong(false);
   }, []);
+
+  //register
 
   const checkRegisterPassword = () => {
     if (registerPassword.length < 6) {
@@ -68,6 +99,38 @@ function LoginWindow() {
     setIsEmailInUse(false);
   }
 
+  //login
+
+  const handleLoginEmailChange = (e) => {
+    setLoginEmail(e.target.value);
+    console.log("registerEmail", loginEmail);
+  };
+
+  const handleLoginPasswordChange = (e) => {
+    setLoginPassword(e.target.value);
+    console.log("registerPassword", loginPassword);
+  };
+
+  function handleLogin() {
+    login(loginEmail, loginPassword);
+  }
+
+  const checkLoginPassword = () => {
+    if (loginPassword.length < 6) {
+      setIsLoginPasswordValid(false);
+    } else {
+      setIsLoginPasswordValid(true);
+    }
+  };
+
+  const checkLoginEmail = () => {
+    if (!loginEmail.includes("@") || !loginEmail.includes(".")) {
+      setIsLoginEmailValid(false);
+    } else {
+      setIsLoginEmailValid(true);
+    }
+  };
+
   return (
     <React.Fragment>
       <Card className="login-card">
@@ -82,14 +145,29 @@ function LoginWindow() {
             type="text"
             placeholder="E-mail Address"
             className="email-input"
-            // onChange={handleEmailChange}
+            onChange={handleLoginEmailChange}
             autoComplete="email"
           />
-          <div className="small-red-errors">
-            {/* {!isLoginEmailValid && <p>Invalid e-mail address</p>} */}
-          </div>
+          {!isLoginEmailValid && !isEmailNotFound ? (
+            <div className="small-red-errors">
+              <p>Invalid e-mail address</p>
+            </div>
+          ) : isLoginEmailValid && !isEmailNotFound ? (
+            <div className="small-red-errors">
+              <p></p>
+            </div>
+          ) : !isLoginEmailValid && isEmailNotFound ? (
+            <div className="small-red-errors-two-errors">
+              <p id="invalid-email">Invalid e-mail address</p>
+              <p id="email-not-found">E-mail address is not found</p>
+            </div>
+          ) : (
+            <div className="small-red-errors">
+              <p>E-mail address is not found</p>
+            </div>
+          )}
         </div>
-        <div className="title-input-error">
+        <div className="title-input-error-login-password">
           <div className="login-titles">
             <p>Password:</p>
           </div>
@@ -97,21 +175,32 @@ function LoginWindow() {
             type="text"
             placeholder="Password"
             className="password-input"
-            // onChange={handlePasswordChange}
+            onChange={handleLoginPasswordChange}
           />
-          {/* {setIsLoginPasswordValid ? (
-            <div className="small-red-errors">
-              <p>
-                <br></br>
-              </p>
-            </div>
-          ) : (
+          {!isLoginPasswordValid && !isPasswordWrong ? (
             <div className="small-red-errors">
               <p>Minimum 6 characters</p>
             </div>
-          )} */}
+          ) : isLoginPasswordValid && !isPasswordWrong ? (
+            <div className="small-red-errors">
+              <p></p>
+            </div>
+          ) : !isLoginPasswordValid && isPasswordWrong ? (
+            <div className="small-red-errors-two-errors">
+              <p id="invalid-password">Minimum 6 characters</p>
+              <p id="password-is-wrong">Password is wrong</p>
+            </div>
+          ) : (
+            <div className="small-red-errors-two-errors">
+              <p>Password is wrong</p>
+            </div>
+          )}
         </div>
-        <Button variant="outline-success" className="login-button">
+        <Button
+          onClick={handleLogin}
+          variant="outline-success"
+          className="login-button"
+        >
           Log In
         </Button>
         <hr id="login-line" />
@@ -133,13 +222,27 @@ function LoginWindow() {
             onChange={handleRegisterEmailChange}
             autoComplete="email"
           />
-          <div className="small-red-errors">
-            {!isRegisterEmailValid && <p>Invalid e-mail address</p>}
-            {isEmailInUse && <p>This address is already in use</p>}
-          </div>
+          {!isEmailInUse && isRegisterEmailValid ? (
+            <div className="small-red-errors">
+              <p></p>
+            </div>
+          ) : !isEmailInUse && !isRegisterEmailValid ? (
+            <div className="small-red-errors">
+              <p>Invalid e-mail address</p>
+            </div>
+          ) : isEmailInUse && isRegisterEmailValid ? (
+            <div className="small-red-errors">
+              <p>This address is already in use</p>
+            </div>
+          ) : (
+            <div className="small-red-errors-two-errors">
+              <p id="invalid-email">Invalid e-mail address</p>
+              <p id="email-in-use">This address is already in use</p>
+            </div>
+          )}
         </div>
-        <div className="title-input-error">
-          <div className="login-titles">
+        <div className="title-input-error-register-password">
+          <div className="login-titles-password">
             <p>Password:</p>
           </div>
           <input
@@ -163,7 +266,7 @@ function LoginWindow() {
         <Button
           onClick={handleRegister}
           variant="outline-success"
-          className="login-button"
+          className="register-button"
         >
           Sign Up
         </Button>
