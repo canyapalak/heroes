@@ -4,7 +4,6 @@ import { signInWithEmailAndPassword } from "firebase/auth";
 import trash from "../components/assets/trash.png";
 import pencil from "../components/assets/pencil.png";
 import { auth } from "../config/FirebaseConfig";
-import { registerVersion } from "firebase/app";
 
 // create context
 export const AuthContext = createContext();

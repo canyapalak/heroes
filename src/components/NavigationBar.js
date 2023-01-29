@@ -10,8 +10,15 @@ function NavigationBar() {
     <div className="navbar">
       <div className="user-name-top-right">
         <p id="welcome">Welcome,&nbsp;</p>
-        <p id="user-name">{user ? user.email : "guest"}</p>
+        {user ? (
+          <Link to="/profile">
+            <p id="user-name">{user.email}</p>
+          </Link>
+        ) : (
+          <p id="user-name">guest</p>
+        )}
       </div>
+
       <Link to="/">
         <img src={HeroesLogo} alt="Logo" id="heroes-logo" />
       </Link>

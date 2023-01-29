@@ -9,6 +9,7 @@ import "../src/components/styles/NavigationBar.css";
 import "../src/components/styles/SearchBar.css";
 import "../src/components/styles/LoginWindow.css";
 import "../src/components/styles/ChatComponent.css";
+import "../src/components/styles/ProfileCard.css";
 import App from "./App";
 import { BrowserRouter } from "react-router-dom";
 

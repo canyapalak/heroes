@@ -46,6 +46,15 @@ function BurgerMenu() {
               </Link>
             )}
           </div>
+          {user && (
+            <div className="profile-icon-and-link">
+              <i class="bi bi-person-fill" id="profile-icon"></i>
+              <Link to="/profile">
+                {" "}
+                <li>Profile</li>{" "}
+              </Link>
+            </div>
+          )}
           <div className="chatroom-icon-and-link">
             <i className="bi bi-chat-square-text-fill" id="chatroom-icon"></i>
             <Link to="/chatroom">

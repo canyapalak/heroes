@@ -93,9 +93,18 @@
     border: 3px solid rgb(214, 126, 198) !important;
 }
 
-.comment-icons {
-    margin-top: -3.1rem;
-    float: right;
-    margin-right: 0.2rem;
+.you-are-not-logged-in {
+    text-align: center;
+    margin-top: 1rem;
+    font-size: medium;
+    color: tomato;
+}
 
+#trash {
+    display: flex;
+    flex-direction: row;
+    margin-left: auto;
+    margin-right: 0.3rem;
+    margin-top: -2.6rem;
+    width: 20px;
 }

@@ -1,6 +1,8 @@
-import { Link } from "@mui/icons-material";
 import {
   addDoc,
+  doc,
+  deleteDoc,
+  setDoc,
   collection,
   getDocs,
   onSnapshot,
@@ -9,19 +11,19 @@ import {
 } from "firebase/firestore";
 import React, { useContext, useEffect, useState } from "react";
 import { Button } from "react-bootstrap";
-import { useNavigate } from "react-router-dom";
 import { db } from "../config/FirebaseConfig";
 import { AuthContext } from "../store/AuthContext";
+import trash from "../components/assets/trash.png";
 
 function ChatComponent() {
   const { user } = useContext(AuthContext);
   const [messages, setMessages] = useState([]);
   const [text, setText] = useState("");
-  const [notLoggedIn, setNotLoggedIn] = useState(null);
-  const redirectTo = useNavigate;
+  const [isLoggedIn, setisLoggedIn] = useState(null);
 
   useEffect(() => {
     getUpdatedMessages();
+    setisLoggedIn(true);
   }, []);
 
   const getUpdatedMessages = () => {
@@ -30,6 +32,7 @@ function ChatComponent() {
       const msgs = [];
       querySnapshot.forEach((doc) => {
         msgs.push(doc.data());
+        console.log("doc.data", doc.data);
       });
       setMessages(msgs);
     });
@@ -60,19 +63,25 @@ function ChatComponent() {
       };
       const docRef = await addDoc(collection(db, "chatroom"), msgObj);
       console.log("Document written with ID: ", docRef.id);
-      notLoggedIn && redirectTo("/login");
+      console.log("docRef", docRef);
     } catch (error) {
       console.log("post message error :>> ", error);
       const errorMessage = error.message;
-      if (errorMessage.includes("addDoc() called with invalid data")) {
-        setNotLoggedIn(true);
+      if (errorMessage.includes("called with invalid data")) {
+        setisLoggedIn(false);
       } else {
-        setNotLoggedIn(false);
+        setisLoggedIn(true);
       }
     }
   };
 
-  console.log("messages", messages);
+  //delete comment
+
+  // const handleDeleteMessage = async () => {
+  //   await deleteDoc(doc(db, "chatroom"));
+  // };
+
+  // console.log("messages :>> ", messages);
 
   return (
     <div className="chatroom-container">
@@ -90,6 +99,14 @@ function ChatComponent() {
                     <p>{msgDate(message.date)}</p>
                   </span>
                   <p className="be-comment-text">{message.text}</p>
+                  {message.author === user.email && (
+                    <img
+                      src={trash}
+                      alt="Delete"
+                      id="trash"
+                      // onClick={handleDeleteMessage}
+                    />
+                  )}
                 </div>
                 <hr />
               </div>
@@ -115,6 +132,17 @@ function ChatComponent() {
               >
                 Submit
               </Button>
+              {isLoggedIn ? (
+                <div className="you-are-not-logged-in">
+                  <p>
+                    <br></br>
+                  </p>
+                </div>
+              ) : (
+                <div className="you-are-not-logged-in">
+                  <p>You are not logged in</p>
+                </div>
+              )}
             </div>
           </form>
         </div>

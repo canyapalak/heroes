@@ -10,6 +10,7 @@ import { AuthContextProvider } from "./store/AuthContext";
 import ChatRoom from "./views/ChatRoom";
 import ProtectedRoute from "./routes/ProtectedRoute";
 import { app } from "./config/FirebaseConfig";
+import ProfilePage from "./views/ProfilePage";
 
 function App() {
   // PREVIOUS FETCH WITH SEARCH ENDPOINT
@@ -27,7 +28,7 @@ function App() {
   // FETCH SPECIFIC HEROES WITH PROMISE.ALL
 
   const [defaultHeroes, setDefaultHeroes] = useState([]);
-  const ids = [70, 620, 644, 332, 638, 717];
+  const ids = [70, 620, 644, 332, 157, 263];
   useEffect(() => {
     // Promise.all([
     //   fetch(`https://www.superheroapi.com/api.php/${apiKey}/70`),
@@ -82,6 +83,7 @@ function App() {
             />
             <Route path="/login" element={<LoginPage />} />
             <Route path="/chatroom" element={<ChatRoom />} />
+            <Route path="/profile" element={<ProfilePage />} />
             <Route path="*" element={<NoMatch />} />
           </Routes>
         </SearchContextProvider>

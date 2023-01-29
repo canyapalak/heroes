@@ -169,3 +169,16 @@
     justify-content: flex-start;
     align-items: center;
 }
+
+#profile-icon {
+    display: flex;
+    font-size: xx-large;
+    margin-right: 1em;
+}
+
+.profile-icon-and-link {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    align-items: center;
+}
