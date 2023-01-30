@@ -22,22 +22,37 @@ function ChatComponent() {
   const [isLoggedIn, setisLoggedIn] = useState(null);
 
   useEffect(() => {
-    getUpdatedMessages();
+    getMessages();
     setisLoggedIn(true);
   }, []);
 
-  const getUpdatedMessages = () => {
+  const getMessages = async () => {
     const q = query(collection(db, "chatroom"), orderBy("date", "asc"));
-    const unsubscribe = onSnapshot(q, (querySnapshot) => {
+    onSnapshot(q, (querySnapshot) => {
       const msgs = [];
       querySnapshot.forEach((doc) => {
-        msgs.push(doc.data());
-        console.log("doc.data", doc.data);
-        console.log("doc.id", doc.id);
+        const msgObj = {
+          id: doc.id,
+          ...doc.data(),
+        };
+        msgs.push(msgObj);
       });
       setMessages(msgs);
     });
   };
+
+  // const getUpdatedMessages = () => {
+  //   const q = query(collection(db, "chatroom"), orderBy("date", "asc"));
+  //   const unsubscribe = onSnapshot(q, (querySnapshot) => {
+  //     const msgs = [];
+  //     querySnapshot.forEach((doc) => {
+  //       msgs.push(doc.data());
+  //       console.log("doc.data", doc.data);
+  //       console.log("doc.id", doc.id);
+  //     });
+  //     setMessages(msgs);
+  //   });
+  // };
 
   const msgDate = (dateAndTime) => {
     const date = new Date(dateAndTime * 1000).toLocaleDateString();
@@ -78,15 +93,15 @@ function ChatComponent() {
 
   //delete comment
 
-  const handleDeleteMessage = async (id) => {
-    await deleteDoc(doc(db, "chatroom", id));
+  const handleDeleteMessage = async (e) => {
+    try {
+      console.log("msgs", e.target.id);
+      await deleteDoc(doc(db, "chatroom", e.target.id));
+      console.log("successfull :>> ");
+    } catch (error) {
+      console.log("error", error);
+    }
   };
-
-  // const handleDeleteMessage = async (id) => {
-  //   await deleteDoc(doc(db, "cities", id));
-  // };
-
-  // console.log("messages :>> ", messages);
 
   return (
     <div className="chatroom-container">
@@ -96,7 +111,6 @@ function ChatComponent() {
           messages.map((message, index) => {
             return (
               <div className="be-comment" key={index}>
-                {console.log("message :>> ", message)}
                 <div className="be-comment-content">
                   <span className="be-comment-name">
                     <p>{message.author}</p>
@@ -105,14 +119,16 @@ function ChatComponent() {
                     <p>{msgDate(message.date)}</p>
                   </span>
                   <p className="be-comment-text">{message.text}</p>
-                  {message.author === user.email && (
-                    <img
-                      src={trash}
-                      alt="Delete"
-                      id="trash"
-                      onClick={handleDeleteMessage}
-                    />
-                  )}
+                  {message.author === user.email ||
+                    (message.author === user.displayName && (
+                      <img
+                        src={trash}
+                        alt="Delete"
+                        id={message.id}
+                        onClick={handleDeleteMessage}
+                        className="trash"
+                      />
+                    ))}
                 </div>
                 <hr />
               </div>

@@ -100,7 +100,7 @@
     color: tomato;
 }
 
-#trash {
+.trash {
     display: flex;
     flex-direction: row;
     margin-left: auto;
