@@ -1,6 +1,6 @@
 .profile-card {
-    margin-right: 10rem;
-    margin-left: 10rem;
+    margin-right: 3rem;
+    margin-left: 3rem;
     margin-bottom: 2rem;
     padding-left: 1rem;
     padding-right: 1rem;
@@ -16,4 +16,150 @@
     font-size: 3rem;
     color: rgb(224, 224, 53);
     margin-top: 1rem;
+}
+
+#profile-picture {
+    width: 7rem;
+    height: 7rem;
+    border: 2px solid rgb(9, 5, 15);
+    border-radius: 90px;
+    margin-right: auto;
+    margin-left: auto;
+    margin-bottom: 1rem;
+    display: block;
+}
+
+.detail-line {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+#small-title {
+    color: #3dede1;
+}
+
+#small-detail {
+    margin-left: 1rem;
+}
+
+.profile-picture-button {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 0px;
+    width: 6rem;
+    background-color: rgb(49, 11, 55);
+    height: 2.5rem;
+    border: 3px solid rgb(214, 126, 198);
+    border-radius: 7px;
+    font-size: x-large;
+    letter-spacing: 1px;
+    color: white;
+    margin-bottom: 2rem;
+}
+
+.profile-picture-button:hover {
+    background-color: rgb(91, 62, 96) !important;
+    border: 3px solid rgb(214, 126, 198) !important;
+}
+
+.profile-picture-button:active {
+    background-color: rgb(59, 47, 59) !important;
+    border: 3spx solid rgb(214, 126, 198) !important;
+}
+
+#choose-username {
+    color: rgb(214, 126, 198);
+    margin-left: 1rem;
+}
+
+#choose-username:hover {
+    color: white
+}
+
+#username-button {
+    display: block;
+    margin-left: 1rem;
+    padding: 0px;
+    width: 10rem;
+    background-color: rgb(49, 11, 55);
+    height: 2.5rem;
+    border: 3px solid rgb(214, 126, 198);
+    border-radius: 7px;
+    font-size: x-large;
+    letter-spacing: 1px;
+    color: white;
+}
+
+#username-button:hover {
+    background-color: rgb(91, 62, 96) !important;
+    border: 3px solid rgb(214, 126, 198) !important;
+}
+
+#username-button:active {
+    background-color: rgb(59, 47, 59) !important;
+    border: 3spx solid rgb(214, 126, 198) !important;
+}
+
+#username-modal {
+    margin-top: 15rem;
+    font-size: 120%;
+    color: black;
+    border: 2px solid rgb(230, 142, 55);
+    border-radius: 5px;
+    background: white
+}
+
+#username-modal .modal-content {
+    background-color: rgb(239, 219, 242);
+}
+
+#username-modal .modal-title {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    color: rgb(116, 1, 1)
+}
+
+#username-modal-save {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 0px;
+    width: 5rem;
+    background-color: rgb(49, 11, 55);
+    height: 2.5rem;
+    border: 3px solid rgb(214, 126, 198);
+    border-radius: 7px;
+    font-size: x-large;
+    letter-spacing: 1px;
+    color: white;
+}
+
+#username-modal-save:hover {
+    background-color: rgb(91, 62, 96) !important;
+    border: 3px solid rgb(214, 126, 198) !important;
+}
+
+#username-modal-save:active {
+    background-color: rgb(59, 47, 59) !important;
+    border: 3spx solid rgb(214, 126, 198) !important;
+}
+
+.username-input {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 12rem;
+    height: 2.5rem;
+    border: 3px solid rgb(214, 126, 198);
+    border-radius: 7px;
+    font-size: x-large;
+    letter-spacing: 1px;
+    padding: 8px;
+}
+
+.username-input:focus {
+    color: rgb(0, 0, 0);
+    border: 3px solid rgb(91, 62, 96);
 }

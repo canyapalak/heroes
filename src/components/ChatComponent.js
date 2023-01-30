@@ -33,6 +33,7 @@ function ChatComponent() {
       querySnapshot.forEach((doc) => {
         msgs.push(doc.data());
         console.log("doc.data", doc.data);
+        console.log("doc.id", doc.id);
       });
       setMessages(msgs);
     });
@@ -58,7 +59,7 @@ function ChatComponent() {
     try {
       const msgObj = {
         text: text,
-        author: user.email,
+        author: user.displayName ? user.displayName : user.email,
         date: new Date(),
       };
       const docRef = await addDoc(collection(db, "chatroom"), msgObj);
@@ -77,8 +78,12 @@ function ChatComponent() {
 
   //delete comment
 
-  // const handleDeleteMessage = async () => {
-  //   await deleteDoc(doc(db, "chatroom"));
+  const handleDeleteMessage = async (id) => {
+    await deleteDoc(doc(db, "chatroom", id));
+  };
+
+  // const handleDeleteMessage = async (id) => {
+  //   await deleteDoc(doc(db, "cities", id));
   // };
 
   // console.log("messages :>> ", messages);
@@ -91,6 +96,7 @@ function ChatComponent() {
           messages.map((message, index) => {
             return (
               <div className="be-comment" key={index}>
+                {console.log("message :>> ", message)}
                 <div className="be-comment-content">
                   <span className="be-comment-name">
                     <p>{message.author}</p>
@@ -104,7 +110,7 @@ function ChatComponent() {
                       src={trash}
                       alt="Delete"
                       id="trash"
-                      // onClick={handleDeleteMessage}
+                      onClick={handleDeleteMessage}
                     />
                   )}
                 </div>
