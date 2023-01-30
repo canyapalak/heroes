@@ -2,6 +2,7 @@ import {
   addDoc,
   doc,
   deleteDoc,
+  updateDoc,
   setDoc,
   collection,
   getDocs,
@@ -10,21 +11,31 @@ import {
   query,
 } from "firebase/firestore";
 import React, { useContext, useEffect, useState } from "react";
-import { Button } from "react-bootstrap";
+import { Button, Modal } from "react-bootstrap";
 import { db } from "../config/FirebaseConfig";
 import { AuthContext } from "../store/AuthContext";
 import trash from "../components/assets/trash.png";
+import pencil from "../components/assets/pencil.png";
 
 function ChatComponent() {
   const { user } = useContext(AuthContext);
   const [messages, setMessages] = useState([]);
   const [text, setText] = useState("");
+  const [updatedText, setUpdatedText] = useState("");
   const [isLoggedIn, setisLoggedIn] = useState(null);
+  const [showModal, setShowModal] = useState(false);
+  const handleCloseModal = () => setShowModal(false);
+  const handleShowModal = () => setShowModal(true);
+  const [showModal2, setShowModal2] = useState(false);
+  const handleCloseModal2 = () => setShowModal2(false);
+  const handleShowModal2 = () => setShowModal2(true);
 
   useEffect(() => {
     getMessages();
     setisLoggedIn(true);
   }, []);
+
+  //read messages
 
   const getMessages = async () => {
     const q = query(collection(db, "chatroom"), orderBy("date", "asc"));
@@ -36,6 +47,7 @@ function ChatComponent() {
           ...doc.data(),
         };
         msgs.push(msgObj);
+        console.log("msgs :>> ", msgs);
       });
       setMessages(msgs);
     });
@@ -64,7 +76,7 @@ function ChatComponent() {
     );
   };
 
-  //add new comment
+  //add new message
 
   const handleMessageInput = (e) => {
     setText(e.target.value);
@@ -91,7 +103,7 @@ function ChatComponent() {
     }
   };
 
-  //delete comment
+  //delete message
 
   const handleDeleteMessage = async (e) => {
     try {
@@ -101,12 +113,33 @@ function ChatComponent() {
     } catch (error) {
       console.log("error", error);
     }
+    handleCloseModal();
+  };
+
+  //edit message
+
+  const handleUpdatedMessageInput = (e) => {
+    setUpdatedText(e.target.value);
+  };
+
+  console.log("setUpdatedText :>> ", updatedText);
+
+  const handleUpdateMessage = async (e) => {
+    try {
+      const docRef = doc(db, "chatroom", e.target.id);
+      await updateDoc(docRef, {
+        text: updatedText,
+      });
+    } catch (error) {
+      console.log("error", error);
+    }
+    handleCloseModal2();
   };
 
   return (
     <div className="chatroom-container">
       <div className="be-comment-block">
-        <h1 className="comments-title">Chat Room</h1>
+        <h1 className="chatroom-title">Chat Room</h1>
         {messages &&
           messages.map((message, index) => {
             return (
@@ -116,18 +149,79 @@ function ChatComponent() {
                     <p>{message.author}</p>
                   </span>
                   <span className="be-comment-time">
-                    <p>{msgDate(message.date)}</p>
+                    <p>{msgDate(message.date.seconds)}</p>
                   </span>
                   <p className="be-comment-text">{message.text}</p>
+
                   {message.author === user.email ||
                     (message.author === user.displayName && (
-                      <img
-                        src={trash}
-                        alt="Delete"
-                        id={message.id}
-                        onClick={handleDeleteMessage}
-                        className="trash"
-                      />
+                      <div className="pencil-and-trash">
+                        <img
+                          src={pencil}
+                          alt="Edit"
+                          id={message.id}
+                          onClick={handleShowModal2}
+                          className="trash"
+                        />
+                        <Modal
+                          show={showModal2}
+                          onHide={handleCloseModal2}
+                          id="username-modal"
+                        >
+                          <Modal.Header closeButton>
+                            <Modal.Title>
+                              Here you can edit your message.
+                            </Modal.Title>
+                          </Modal.Header>
+                          <Modal.Body>
+                            <textarea
+                              className="form-input"
+                              placeholder="Edit your message"
+                              defaultValue={message.text}
+                              onChange={handleUpdatedMessageInput}
+                            ></textarea>
+                          </Modal.Body>
+                          <Modal.Footer>
+                            <Button
+                              variant="primary"
+                              className="delete-confirm-button"
+                              id={message.id}
+                              onClick={handleUpdateMessage}
+                            >
+                              Save
+                            </Button>
+                          </Modal.Footer>
+                        </Modal>
+
+                        <img
+                          src={trash}
+                          alt="Delete"
+                          id={message.id}
+                          onClick={handleShowModal}
+                          className="trash"
+                        />
+                        <Modal
+                          show={showModal}
+                          onHide={handleCloseModal}
+                          id="username-modal"
+                        >
+                          <Modal.Header closeButton>
+                            <Modal.Title>
+                              Are you sure you want to delete this message?
+                            </Modal.Title>
+                          </Modal.Header>
+                          <Modal.Footer>
+                            <Button
+                              variant="primary"
+                              className="delete-confirm-button"
+                              id={message.id}
+                              onClick={handleDeleteMessage}
+                            >
+                              Delete
+                            </Button>
+                          </Modal.Footer>
+                        </Modal>
+                      </div>
                     ))}
                 </div>
                 <hr />

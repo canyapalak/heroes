@@ -103,12 +103,10 @@ function LoginWindow() {
 
   const handleLoginEmailChange = (e) => {
     setLoginEmail(e.target.value);
-    console.log("registerEmail", loginEmail);
   };
 
   const handleLoginPasswordChange = (e) => {
     setLoginPassword(e.target.value);
-    console.log("registerPassword", loginPassword);
   };
 
   function handleLogin() {

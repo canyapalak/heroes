@@ -10,12 +10,12 @@
     background: linear-gradient(90deg, rgb(9, 5, 15) 29%, rgb(72, 18, 86) 71%);
 }
 
-.comments-title {
+.chatroom-title {
     color: rgb(224, 224, 53);
-    font-size: xx-large;
+    font-size: 3rem;
     text-align: center;
     padding-bottom: 2rem;
-    padding-top: 0.5rem;
+    margin-top: -2rem;
 }
 
 .be-comment-block {
@@ -28,6 +28,7 @@
     height: 0.2rem;
     opacity: 70%;
     margin-top: 2rem;
+    
 }
 
 .be-comment-content span {
@@ -103,8 +104,56 @@
 .trash {
     display: flex;
     flex-direction: row;
-    margin-left: auto;
+    opacity: 0.5;
+    cursor: pointer;
+}
+
+.trash:hover {
+    opacity: 1;
+}
+
+.pencil {
+    display: flex;
+    flex-direction: row;
+    opacity: 0.5;
+    cursor: pointer;
+}
+
+.pencil:hover {
+    opacity: 1;
+}
+
+.pencil-and-trash {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+    justify-content:right;
+    margin-top: -3rem;
     margin-right: 0.3rem;
-    margin-top: -2.6rem;
-    width: 20px;
+}
+
+.delete-confirm-button {
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 1rem;
+    padding: 0px;
+    width: 6rem;
+    background-color: rgb(49, 11, 55);
+    height: 2.5rem;
+    border: 3px solid rgb(214, 126, 198);
+    border-radius: 7px;
+    font-size: x-large;
+    letter-spacing: 1px;
+    color: white;
+    text-decoration: none;
+}
+
+.delete-confirm-button:hover {
+    background-color: rgb(91, 62, 96) !important;
+    border: 3px solid rgb(214, 126, 198) !important;
+}
+
+.delete-confirm-button:active {
+    background-color: rgb(59, 47, 59) !important;
+    border: 3px solid rgb(214, 126, 198) !important;
 }
