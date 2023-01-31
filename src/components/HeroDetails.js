@@ -2,6 +2,7 @@ import { useParams } from "react-router-dom";
 import { useState, useEffect } from "react";
 import Card from "react-bootstrap/Card";
 import HeroPlaceholder from "./assets/hero-placeholder.jpg";
+import FavEmpty from "./assets/fav-empty.png";
 
 function HeroDetails() {
   const [oneHero, setOneHero] = useState("");
@@ -43,6 +44,7 @@ function HeroDetails() {
                   onError={onImageError2}
                   id="details-image"
                 />
+                <img src={FavEmpty} alt="Not Fav" id="fav-empty" />
                 <div className="stats">
                   <p id="sub-titles">Powerstats</p>
 

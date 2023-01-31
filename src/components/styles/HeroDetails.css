@@ -132,3 +132,12 @@
 #small-info {
     color: rgb(233, 244, 227);
 }
+
+#fav-empty {
+    margin-left: auto;
+    margin-right: auto; 
+    display: block;
+    margin-top: -3.5rem;
+    z-index: 2;
+    position: relative;
+}

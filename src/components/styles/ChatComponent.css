@@ -51,7 +51,6 @@
 .be-comment-text {
     display: flex;
     flex-wrap: wrap;
-    flex-direction: row;
     justify-content:left;
     align-items: center;
     color: rgb(9, 5, 15);
@@ -61,6 +60,7 @@
 }
 
 .chat-avatar {
+    overflow: hidden;
     width: 4rem;
     height: 4rem;
     border: 2px solid rgb(72, 18, 86);
@@ -68,7 +68,7 @@
     margin-bottom: 0.5rem;
     margin-top: 0.5rem;
     margin-left: 0.5rem;
-    margin-right: 3rem;
+    margin-right: 1rem;
 }
 
 #message-text {

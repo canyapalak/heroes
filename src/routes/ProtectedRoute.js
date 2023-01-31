@@ -6,9 +6,19 @@ import { AuthContext } from "../store/AuthContext";
 function ProtectedRoute({ children }) {
   console.log("children", children);
 
-  const { user } = useContext(AuthContext);
+  const { user, loader } = useContext(AuthContext);
 
-  return <>{user ? children : <Navigate to="/login" />}</>;
+  return (
+    <>
+      {loader ? (
+        <p>....loading...</p>
+      ) : user ? (
+        children
+      ) : (
+        <Navigate to="/login" />
+      )}
+    </>
+  );
 }
 
 export default ProtectedRoute;

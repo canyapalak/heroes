@@ -9,7 +9,7 @@ import avatarPlaceholder from "./assets/avatar-placeholder.png";
 import { useEffect } from "react";
 
 function ProfileCard() {
-  const { user } = useContext(AuthContext);
+  const { user, currentUser } = useContext(AuthContext);
   console.log("user :>> ", user);
 
   const [showModal, setShowModal] = useState(false);
@@ -65,6 +65,7 @@ function ProfileCard() {
 
   const handleImageInput = (e) => {
     if (e.target.files[0]) {
+      console.log(" e.target", e);
       setNewImg(e.target.files[0]);
     }
   };
@@ -72,7 +73,7 @@ function ProfileCard() {
   console.log("newImg", newImg);
 
   const changeUserImg = () => {
-    const imageRef = ref(storage, "newImg");
+    const imageRef = ref(storage, newImg);
     uploadBytes(imageRef, newImg)
       .then(() => {
         getDownloadURL(imageRef)
@@ -82,11 +83,13 @@ function ProfileCard() {
             updateProfile(auth.currentUser, {
               photoURL: url,
             });
+            currentUser();
+
+            handleCloseModalImg();
           })
           .catch((error) => {
             console.log(error.message, "error getting the image url");
           });
-        setNewImg(null);
       })
       .catch((error) => {
         console.log(error.message);
@@ -121,7 +124,7 @@ function ProfileCard() {
         <Card.Body>
           <div className="profile-details">
             <img
-              src={user.photoURL}
+              src={user?.photoURL}
               alt="Profile Picture"
               id="profile-picture"
             />
@@ -164,7 +167,7 @@ function ProfileCard() {
             <span className="detail-line">
               <p id="small-title">Username:</p>
               {isUserName ? (
-                <p id="small-detail">{user.displayName}</p>
+                <p id="small-detail">{user?.displayName}</p>
               ) : (
                 <>
                   <Button
@@ -207,15 +210,15 @@ function ProfileCard() {
             </span>
             <span className="detail-line">
               <p id="small-title">E-Mail Address:</p>
-              <p id="small-detail">{user.email}</p>
+              <p id="small-detail">{user?.email}</p>
             </span>
             <span className="detail-line">
               <p id="small-title">Registered Since:</p>
-              <p id="small-detail">{user.metadata.creationTime}</p>
+              <p id="small-detail">{user?.metadata?.creationTime}</p>
             </span>
             <span className="detail-line">
               <p id="small-title">Last Log In:</p>
-              <p id="small-detail">{user.metadata.lastSignInTime}</p>
+              <p id="small-detail">{user?.metadata?.lastSignInTime}</p>
             </span>
           </div>
         </Card.Body>

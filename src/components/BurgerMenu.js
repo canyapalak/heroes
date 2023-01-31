@@ -1,4 +1,5 @@
 import { useContext, useEffect, useState } from "react";
+import { getAuth, signOut } from "firebase/auth";
 import { Link, useNavigate } from "react-router-dom";
 import { AuthContext } from "../store/AuthContext";
 
@@ -15,9 +16,20 @@ function BurgerMenu() {
     }
   }, [user]);
 
+  // function logOut() {
+  //   setUser("");
+  //   redirectTo("/");
+  // }
   function logOut() {
-    setUser("");
-    redirectTo("/");
+    const auth = getAuth();
+    signOut(auth)
+      .then(() => {
+        setUser("");
+        redirectTo("/");
+      })
+      .catch((error) => {
+        console.log("log out error", error);
+      });
   }
 
   return (

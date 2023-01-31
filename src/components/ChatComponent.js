@@ -80,7 +80,8 @@ function ChatComponent() {
         text: text,
         author: user.displayName ? user.displayName : user.email,
         date: new Date(),
-        profileImg: user.photoURL,
+        userid: user.uid,
+        avatar: user.photoURL,
       };
       const docRef = await addDoc(collection(db, "chatroom"), msgObj);
       console.log("Document written with ID: ", docRef.id);
@@ -115,8 +116,6 @@ function ChatComponent() {
     setUpdatedText(e.target.value);
   };
 
-  console.log("setUpdatedText :>> ", updatedText);
-
   const handleUpdateMessage = async (e) => {
     try {
       const docRef = doc(db, "chatroom", e.target.id);
@@ -146,7 +145,7 @@ function ChatComponent() {
                   </span>
                   <div className="be-comment-text">
                     <img
-                      src={message.profileImg}
+                      src={message.avatar}
                       alt="Avatar"
                       className="chat-avatar"
                     />

@@ -1,5 +1,8 @@
-import { createContext, useState } from "react";
-import { createUserWithEmailAndPassword } from "firebase/auth";
+import { createContext, useEffect, useState } from "react";
+import {
+  createUserWithEmailAndPassword,
+  onAuthStateChanged,
+} from "firebase/auth";
 import { signInWithEmailAndPassword } from "firebase/auth";
 import trash from "../components/assets/trash.png";
 import pencil from "../components/assets/pencil.png";
@@ -10,7 +13,9 @@ export const AuthContext = createContext();
 
 //create the store
 export const AuthContextProvider = (props) => {
+  console.log("context run>>>");
   const [user, setUser] = useState("");
+  const [loader, setLoader] = useState(true);
   const [error, setError] = useState({});
   const [isEmailInUse, setIsEmailInUse] = useState(false);
   const [isEmailNotFound, setIsEmailNotFound] = useState(false);
@@ -66,6 +71,29 @@ export const AuthContextProvider = (props) => {
       }
     }
   };
+  useEffect(() => {
+    currentUser();
+  }, []);
+
+  const currentUser = () => {
+    console.log("currentUser run");
+    onAuthStateChanged(auth, (user) => {
+      if (user) {
+        // User is signed in, see docs for a list of available properties
+        // https://firebase.google.com/docs/reference/js/firebase.User
+        const uid = user.uid;
+        setUser(user);
+        setLoader(false);
+        console.log("currentUser >>>", user);
+      } else {
+        setUser(null);
+        setLoader(false);
+
+        // User is signed out
+        // ...
+      }
+    });
+  };
 
   return (
     <AuthContext.Provider
@@ -80,7 +108,9 @@ export const AuthContextProvider = (props) => {
         setIsPasswordWrong,
         user,
         setUser,
+        currentUser,
         error,
+        loader,
       }}
     >
       {props.children}
