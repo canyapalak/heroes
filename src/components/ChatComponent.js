@@ -16,6 +16,7 @@ import { db } from "../config/FirebaseConfig";
 import { AuthContext } from "../store/AuthContext";
 import trash from "../components/assets/trash.png";
 import pencil from "../components/assets/pencil.png";
+import avatarPlaceholder from "./assets/avatar-placeholder.png";
 
 function ChatComponent() {
   const { user } = useContext(AuthContext);
@@ -53,19 +54,6 @@ function ChatComponent() {
     });
   };
 
-  // const getUpdatedMessages = () => {
-  //   const q = query(collection(db, "chatroom"), orderBy("date", "asc"));
-  //   const unsubscribe = onSnapshot(q, (querySnapshot) => {
-  //     const msgs = [];
-  //     querySnapshot.forEach((doc) => {
-  //       msgs.push(doc.data());
-  //       console.log("doc.data", doc.data);
-  //       console.log("doc.id", doc.id);
-  //     });
-  //     setMessages(msgs);
-  //   });
-  // };
-
   const msgDate = (dateAndTime) => {
     const date = new Date(dateAndTime * 1000).toLocaleDateString();
     const time = new Date(dateAndTime * 1000).toLocaleTimeString();
@@ -84,10 +72,15 @@ function ChatComponent() {
 
   const handleSubmitMessage = async () => {
     try {
+      if (user.photoURL === null) {
+        user.photoURL = avatarPlaceholder;
+      }
+
       const msgObj = {
         text: text,
         author: user.displayName ? user.displayName : user.email,
         date: new Date(),
+        profileImg: user.photoURL,
       };
       const docRef = await addDoc(collection(db, "chatroom"), msgObj);
       console.log("Document written with ID: ", docRef.id);
@@ -151,8 +144,14 @@ function ChatComponent() {
                   <span className="be-comment-time">
                     <p>{msgDate(message.date.seconds)}</p>
                   </span>
-                  <p className="be-comment-text">{message.text}</p>
-
+                  <div className="be-comment-text">
+                    <img
+                      src={message.profileImg}
+                      alt="Avatar"
+                      className="chat-avatar"
+                    />
+                    <p id="message-text">{message.text}</p>
+                  </div>
                   {message.author === user.email ||
                     (message.author === user.displayName && (
                       <div className="pencil-and-trash">
@@ -170,7 +169,8 @@ function ChatComponent() {
                         >
                           <Modal.Header closeButton>
                             <Modal.Title>
-                              Here you can edit your message.
+                              Please edit your message. You can edit your
+                              messages anytime you want.
                             </Modal.Title>
                           </Modal.Header>
                           <Modal.Body>

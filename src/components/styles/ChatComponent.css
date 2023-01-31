@@ -49,13 +49,35 @@
 }
 
 .be-comment-text {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+    justify-content:left;
+    align-items: center;
     color: rgb(9, 5, 15);
-    display: block;
     background: rgb(247, 219, 242);
     border: 3px solid rgb(214, 126, 198);
-    padding: 15px 20px 20px 20px;
     border-radius: 10px;
 }
+
+.chat-avatar {
+    width: 4rem;
+    height: 4rem;
+    border: 2px solid rgb(72, 18, 86);
+    border-radius: 10px;
+    margin-bottom: 0.5rem;
+    margin-top: 0.5rem;
+    margin-left: 0.5rem;
+    margin-right: 3rem;
+}
+
+#message-text {
+text-align: justify;
+padding-top: 1rem;
+padding-left: 1rem;
+padding-right: 1rem;
+}
+
 
 .form-input {
     color: rgb(9, 5, 15);
@@ -128,7 +150,7 @@
     flex-wrap: wrap;
     flex-direction: row;
     justify-content:right;
-    margin-top: -3rem;
+    margin-top: -2rem;
     margin-right: 0.3rem;
 }
 

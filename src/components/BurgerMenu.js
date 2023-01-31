@@ -48,7 +48,7 @@ function BurgerMenu() {
           </div>
           {user && (
             <div className="profile-icon-and-link">
-              <i class="bi bi-person-fill" id="profile-icon"></i>
+              <i className="bi bi-person-fill" id="profile-icon"></i>
               <Link to="/profile">
                 {" "}
                 <li>Profile</li>{" "}

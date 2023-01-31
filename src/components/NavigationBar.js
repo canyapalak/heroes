@@ -1,10 +1,16 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import HeroesLogo from "./assets/heroes-noback.png";
 import { AuthContext } from "../store/AuthContext";
 
 function NavigationBar() {
   const { user } = useContext(AuthContext);
+
+  // useEffect(() => {
+  //   console.log("user changed", user);
+  // }, [{ user }]);
+
+  // console.log("user.displayName", user.displayName);
 
   return (
     <div className="navbar">
