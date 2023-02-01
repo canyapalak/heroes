@@ -16,19 +16,11 @@ function NavigationBar() {
     <div className="navbar">
       <div className="user-name-top-right">
         <p id="welcome">Welcome,&nbsp;</p>
-        {user.email && !user.displayName ? (
-          <Link to="/profile">
-            <p id="user-name">{user.email}</p>
-          </Link>
-        ) : !user.email && !user.displayName ? (
+        {!user ? (
           <p id="user-name">guest</p>
-        ) : user.mail && user.displayName ? (
-          <Link to="/profile">
-            <p id="user-name">{user.displayName}</p>
-          </Link>
         ) : (
           <Link to="/profile">
-            <p id="user-name">{user.displayName}</p>
+            <p id="user-name">{user.displayName || user.email}</p>
           </Link>
         )}
       </div>
