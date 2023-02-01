@@ -54,19 +54,14 @@ function HeroDetails() {
 
   const checkToggle = async () => {
     const favRef = doc(db, "favorites", user.uid);
+
     const favSnap = await getDoc(favRef);
     console.log("favSnap", favSnap);
     const heroesArray =
       favSnap._document.data.value.mapValue.fields.heroes.arrayValue.values;
-    console.log("heroesArray :>> ", heroesArray);
 
-    heroesArray.forEach((hero) => {
-      if (hero === id) {
-        setIsToggled(true);
-      } else {
-        setIsToggled(false);
-      }
-    });
+    const isInFavorites = heroesArray.find((hero) => hero.stringValue === id);
+    setIsToggled(isInFavorites);
   };
 
   function setToggle() {
