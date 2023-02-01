@@ -21,15 +21,28 @@ import avatarPlaceholder from "./assets/avatar-placeholder.png";
 function ChatComponent() {
   const { user } = useContext(AuthContext);
   const [messages, setMessages] = useState([]);
+  const [selectedMessage, setSelectedMessages] = useState([]);
   const [text, setText] = useState("");
   const [updatedText, setUpdatedText] = useState("");
   const [isLoggedIn, setisLoggedIn] = useState(null);
-  const [showModal, setShowModal] = useState(false);
-  const handleCloseModal = () => setShowModal(false);
-  const handleShowModal = () => setShowModal(true);
-  const [showModal2, setShowModal2] = useState(false);
-  const handleCloseModal2 = () => setShowModal2(false);
-  const handleShowModal2 = () => setShowModal2(true);
+  const [showEditModal, setShowEditModal] = useState(false);
+  const handleCloseEditModal = () => {
+    setSelectedMessages(null);
+    setShowEditModal(false);
+  };
+  const handleShowEditModal = (message) => {
+    setSelectedMessages(message);
+    setShowEditModal(true);
+  };
+  const [showDeleteModal, setShowDeleteModal] = useState(false);
+  const handleCloseDeleteModal = () => {
+    setSelectedMessages(null);
+    setShowDeleteModal(false);
+  };
+  const handleShowDeleteModal = (message) => {
+    setSelectedMessages(message);
+    setShowDeleteModal(true);
+  };
 
   useEffect(() => {
     getMessages();
@@ -86,6 +99,7 @@ function ChatComponent() {
       const docRef = await addDoc(collection(db, "chatroom"), msgObj);
       console.log("Document written with ID: ", docRef.id);
       console.log("docRef", docRef);
+      setText("");
     } catch (error) {
       console.log("post message error :>> ", error);
       const errorMessage = error.message;
@@ -107,7 +121,7 @@ function ChatComponent() {
     } catch (error) {
       console.log("error", error);
     }
-    handleCloseModal();
+    handleCloseEditModal();
   };
 
   //edit message
@@ -125,7 +139,7 @@ function ChatComponent() {
     } catch (error) {
       console.log("error", error);
     }
-    handleCloseModal2();
+    handleCloseDeleteModal();
   };
 
   return (
@@ -161,68 +175,17 @@ function ChatComponent() {
                         src={pencil}
                         alt="Edit"
                         id={message.id}
-                        onClick={handleShowModal2}
+                        onClick={() => handleShowDeleteModal(message)}
                         className="trash"
                       />
-                      <Modal
-                        show={showModal2}
-                        onHide={handleCloseModal2}
-                        id="username-modal"
-                      >
-                        <Modal.Header closeButton>
-                          <Modal.Title>
-                            Please edit your message. You can edit your messages
-                            anytime you want.
-                          </Modal.Title>
-                        </Modal.Header>
-                        <Modal.Body>
-                          <textarea
-                            className="form-input"
-                            placeholder="Edit your message"
-                            defaultValue={message.text}
-                            onChange={handleUpdatedMessageInput}
-                          ></textarea>
-                        </Modal.Body>
-                        <Modal.Footer>
-                          <Button
-                            variant="primary"
-                            className="delete-confirm-button"
-                            id={message.id}
-                            onClick={handleUpdateMessage}
-                          >
-                            Save
-                          </Button>
-                        </Modal.Footer>
-                      </Modal>
 
                       <img
                         src={trash}
                         alt="Delete"
                         id={message.id}
-                        onClick={handleShowModal}
+                        onClick={() => handleShowEditModal(message)}
                         className="trash"
                       />
-                      <Modal
-                        show={showModal}
-                        onHide={handleCloseModal}
-                        id="username-modal"
-                      >
-                        <Modal.Header closeButton>
-                          <Modal.Title>
-                            Are you sure you want to delete this message?
-                          </Modal.Title>
-                        </Modal.Header>
-                        <Modal.Footer>
-                          <Button
-                            variant="primary"
-                            className="delete-confirm-button"
-                            id={message.id}
-                            onClick={handleDeleteMessage}
-                          >
-                            Delete
-                          </Button>
-                        </Modal.Footer>
-                      </Modal>
                     </div>
                   )}
                 </div>
@@ -230,6 +193,57 @@ function ChatComponent() {
               </div>
             );
           })}
+        <Modal
+          show={showDeleteModal}
+          onHide={handleCloseDeleteModal}
+          id="username-modal"
+        >
+          <Modal.Header closeButton>
+            <Modal.Title>
+              Please edit your message. You can edit your messages anytime you
+              want.
+            </Modal.Title>
+          </Modal.Header>
+          <Modal.Body>
+            <textarea
+              className="form-input"
+              placeholder="Edit your message"
+              defaultValue={selectedMessage?.text}
+              onChange={handleUpdatedMessageInput}
+            ></textarea>
+          </Modal.Body>
+          <Modal.Footer>
+            <Button
+              variant="primary"
+              className="delete-confirm-button"
+              id={selectedMessage?.id}
+              onClick={handleUpdateMessage}
+            >
+              Save
+            </Button>
+          </Modal.Footer>
+        </Modal>
+        <Modal
+          show={showEditModal}
+          onHide={handleCloseEditModal}
+          id="username-modal"
+        >
+          <Modal.Header closeButton>
+            <Modal.Title>
+              Are you sure you want to delete this message?
+            </Modal.Title>
+          </Modal.Header>
+          <Modal.Footer>
+            <Button
+              variant="primary"
+              className="delete-confirm-button"
+              id={selectedMessage?.id}
+              onClick={handleDeleteMessage}
+            >
+              Delete
+            </Button>
+          </Modal.Footer>
+        </Modal>
         <div>
           <form className="form-block">
             <div className="row">
@@ -239,6 +253,7 @@ function ChatComponent() {
                     className="form-input"
                     required=""
                     placeholder="Write a comment..."
+                    value={text}
                     onChange={handleMessageInput}
                   ></textarea>
                 </div>

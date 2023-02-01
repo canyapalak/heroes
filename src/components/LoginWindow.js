@@ -44,7 +44,6 @@ function LoginWindow() {
     checkLoginPassword();
     if (user) {
       redirectTo("/");
-      console.log("user :>> ", user);
     }
   }, [loginPassword, user]);
 

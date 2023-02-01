@@ -29,8 +29,6 @@ export const AuthContextProvider = (props) => {
         password
       );
 
-      const user = userCredential.user;
-      console.log("user :>> ", user);
       setUser(userCredential.user);
     } catch (error) {
       console.log("error", error);
@@ -105,8 +103,6 @@ export const AuthContextProvider = (props) => {
         isPasswordWrong,
         setIsPasswordWrong,
         user,
-        setUser,
-        currentUser,
         error,
         loader,
       }}
