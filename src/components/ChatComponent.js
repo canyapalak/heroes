@@ -101,7 +101,7 @@ function ChatComponent() {
 
   const handleDeleteMessage = async (e) => {
     try {
-      console.log("msgs", e.target.id);
+      console.log("delete msgs", e.target.id);
       await deleteDoc(doc(db, "chatroom", e.target.id));
       console.log("successfull :>> ");
     } catch (error) {
@@ -137,91 +137,94 @@ function ChatComponent() {
             return (
               <div className="be-comment" key={index}>
                 <div className="be-comment-content">
-                  <span className="be-comment-name">
-                    <p>{message.author}</p>
-                  </span>
-                  <span className="be-comment-time">
-                    <p>{msgDate(message.date.seconds)}</p>
-                  </span>
+                  <div className="be-comment-details">
+                    <span className="be-comment-avatar">
+                      <img
+                        src={message.avatar}
+                        alt="Avatar"
+                        className="chat-avatar"
+                      />
+                    </span>
+                    <span className="be-comment-name">
+                      <p>{message.author}</p>
+                    </span>
+                    <span className="be-comment-time">
+                      <p>{msgDate(message.date.seconds)}</p>
+                    </span>
+                  </div>
                   <div className="be-comment-text">
-                    <img
-                      src={message.avatar}
-                      alt="Avatar"
-                      className="chat-avatar"
-                    />
                     <p id="message-text">{message.text}</p>
                   </div>
-                  {message.author === user.email ||
-                    (message.author === user.displayName && (
-                      <div className="pencil-and-trash">
-                        <img
-                          src={pencil}
-                          alt="Edit"
-                          id={message.id}
-                          onClick={handleShowModal2}
-                          className="trash"
-                        />
-                        <Modal
-                          show={showModal2}
-                          onHide={handleCloseModal2}
-                          id="username-modal"
-                        >
-                          <Modal.Header closeButton>
-                            <Modal.Title>
-                              Please edit your message. You can edit your
-                              messages anytime you want.
-                            </Modal.Title>
-                          </Modal.Header>
-                          <Modal.Body>
-                            <textarea
-                              className="form-input"
-                              placeholder="Edit your message"
-                              defaultValue={message.text}
-                              onChange={handleUpdatedMessageInput}
-                            ></textarea>
-                          </Modal.Body>
-                          <Modal.Footer>
-                            <Button
-                              variant="primary"
-                              className="delete-confirm-button"
-                              id={message.id}
-                              onClick={handleUpdateMessage}
-                            >
-                              Save
-                            </Button>
-                          </Modal.Footer>
-                        </Modal>
+                  {message.userid === user.uid && (
+                    <div className="pencil-and-trash">
+                      <img
+                        src={pencil}
+                        alt="Edit"
+                        id={message.id}
+                        onClick={handleShowModal2}
+                        className="trash"
+                      />
+                      <Modal
+                        show={showModal2}
+                        onHide={handleCloseModal2}
+                        id="username-modal"
+                      >
+                        <Modal.Header closeButton>
+                          <Modal.Title>
+                            Please edit your message. You can edit your messages
+                            anytime you want.
+                          </Modal.Title>
+                        </Modal.Header>
+                        <Modal.Body>
+                          <textarea
+                            className="form-input"
+                            placeholder="Edit your message"
+                            defaultValue={message.text}
+                            onChange={handleUpdatedMessageInput}
+                          ></textarea>
+                        </Modal.Body>
+                        <Modal.Footer>
+                          <Button
+                            variant="primary"
+                            className="delete-confirm-button"
+                            id={message.id}
+                            onClick={handleUpdateMessage}
+                          >
+                            Save
+                          </Button>
+                        </Modal.Footer>
+                      </Modal>
 
-                        <img
-                          src={trash}
-                          alt="Delete"
-                          id={message.id}
-                          onClick={handleShowModal}
-                          className="trash"
-                        />
-                        <Modal
-                          show={showModal}
-                          onHide={handleCloseModal}
-                          id="username-modal"
-                        >
-                          <Modal.Header closeButton>
-                            <Modal.Title>
-                              Are you sure you want to delete this message?
-                            </Modal.Title>
-                          </Modal.Header>
-                          <Modal.Footer>
-                            <Button
-                              variant="primary"
-                              className="delete-confirm-button"
-                              id={message.id}
-                              onClick={handleDeleteMessage}
-                            >
-                              Delete
-                            </Button>
-                          </Modal.Footer>
-                        </Modal>
-                      </div>
-                    ))}
+                      <img
+                        src={trash}
+                        alt="Delete"
+                        id={message.id}
+                        onClick={handleShowModal}
+                        className="trash"
+                      />
+                      <Modal
+                        show={showModal}
+                        onHide={handleCloseModal}
+                        id="username-modal"
+                      >
+                        <Modal.Header closeButton>
+                          <Modal.Title>
+                            Are you sure you want to delete this message?
+                          </Modal.Title>
+                        </Modal.Header>
+                        <Modal.Footer>
+                          <Button
+                            variant="primary"
+                            className="delete-confirm-button"
+                            id={message.id}
+                            onClick={handleDeleteMessage}
+                          >
+                            Delete
+                          </Button>
+                        </Modal.Footer>
+                      </Modal>
+                    </div>
+                  )}
                 </div>
                 <hr />
               </div>

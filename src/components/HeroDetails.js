@@ -1,10 +1,30 @@
+import {
+  addDoc,
+  doc,
+  deleteDoc,
+  updateDoc,
+  setDoc,
+  collection,
+  getDocs,
+  getDoc,
+  onSnapshot,
+  orderBy,
+  query,
+  arrayUnion,
+  arrayRemove,
+} from "firebase/firestore";
 import { useParams } from "react-router-dom";
-import { useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import Card from "react-bootstrap/Card";
+import IconEmpty from "./assets/icon-empty.png";
+import IconFull from "./assets/icon-full.png";
+import { AuthContext } from "../store/AuthContext";
+import { useContext } from "react";
+import { db } from "../config/FirebaseConfig";
 import HeroPlaceholder from "./assets/hero-placeholder.jpg";
-import FavEmpty from "./assets/fav-empty.png";
 
 function HeroDetails() {
+  const { user } = useContext(AuthContext);
   const [oneHero, setOneHero] = useState("");
 
   const { id } = useParams();
@@ -14,12 +34,12 @@ function HeroDetails() {
       `https://www.superheroapi.com/api.php/${process.env.REACT_APP_APIKEY}/${id}`
     );
     const result = await response.json();
-    console.log("Async result: ", result);
     setOneHero(result);
   };
 
   useEffect(() => {
     fetchOneHero().catch((error) => console.log("Async error: ", error));
+    checkToggle();
   }, []);
 
   const onImageError2 = (e) => {
@@ -28,23 +48,115 @@ function HeroDetails() {
 
   const gradArray = ["st-1", "st-2", "st-3", "st-4", "st-5", "st-6"];
 
+  //favorites
+
+  const [isToggled, setIsToggled] = useState(false);
+
+  const checkToggle = async () => {
+    const favRef = doc(db, "favorites", user.uid);
+    const favSnap = await getDoc(favRef);
+    console.log("favSnap", favSnap);
+    const heroesArray =
+      favSnap._document.data.value.mapValue.fields.heroes.arrayValue.values;
+    console.log("heroesArray :>> ", heroesArray);
+
+    heroesArray.forEach((hero) => {
+      if (hero === id) {
+        setIsToggled(true);
+      } else {
+        setIsToggled(false);
+      }
+    });
+  };
+
+  function setToggle() {
+    if (!isToggled) {
+      console.log("hero id", id);
+
+      const createFavDoc = async () => {
+        //first check if doc exists
+        try {
+          const favRef = doc(db, "favorites", user.uid);
+          const favSnap = await getDoc(favRef);
+
+          //if doc exists, update it
+
+          if (favSnap.exists()) {
+            try {
+              await updateDoc(doc(db, "favorites", user.uid), {
+                heroes: arrayUnion(id),
+              });
+              console.log("document updated");
+              setIsToggled(true);
+            } catch (e) {
+              console.log("error :>> ", e);
+            }
+            //if doc doesnt exist, create it
+          } else {
+            try {
+              await setDoc(doc(db, "favorites", user.uid), {
+                heroes: [id],
+              });
+              console.log("document added");
+              setIsToggled(true);
+            } catch (e) {
+              console.log("error :>> ", e);
+            }
+          }
+        } catch (error) {}
+      };
+      createFavDoc();
+    }
+
+    if (isToggled) {
+      const removeFav = async () => {
+        try {
+          const favRef = doc(db, "favorites", user.uid);
+          const favSnap = await getDoc(favRef);
+          if (favSnap.exists()) {
+            try {
+              await updateDoc(doc(db, "favorites", user.uid), {
+                heroes: arrayRemove(id),
+              });
+              console.log("document updated");
+              setIsToggled(false);
+            } catch (e) {
+              console.log("error :>> ", e);
+            }
+          }
+        } catch (error) {
+          console.log("error :>> ", e);
+        }
+      };
+      removeFav();
+    }
+  }
+
   return (
     <div className="details-container">
       {oneHero ? (
         <>
           <Card className="details-card">
-            <Card.Title id="details-name">
-              <p id=";details-name">{oneHero.name}</p>
+            <div onClick={setToggle} className="star-icon">
+              {!isToggled ? (
+                <img src={IconEmpty} alt="Not Favorite" />
+              ) : (
+                <img src={IconFull} alt="Favorite" />
+              )}
+            </div>
+            <Card.Title id="details-title">
+              <p id="details-name">{oneHero.name}</p>
             </Card.Title>
             <Card.Body>
               <div className="image-and-stats">
-                <img
-                  src={oneHero.image.url}
-                  alt={oneHero.name}
-                  onError={onImageError2}
-                  id="details-image"
-                />
-                <img src={FavEmpty} alt="Not Fav" id="fav-empty" />
+                <div>
+                  <img
+                    src={oneHero.image.url}
+                    alt={oneHero.name}
+                    onError={onImageError2}
+                    id="details-image"
+                  />
+                </div>
                 <div className="stats">
                   <p id="sub-titles">Powerstats</p>
 

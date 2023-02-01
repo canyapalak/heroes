@@ -4,8 +4,6 @@ import { Navigate } from "react-router-dom";
 import { AuthContext } from "../store/AuthContext";
 
 function ProtectedRoute({ children }) {
-  console.log("children", children);
-
   const { user, loader } = useContext(AuthContext);
 
   return (

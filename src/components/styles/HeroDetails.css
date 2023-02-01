@@ -133,11 +133,17 @@
     color: rgb(233, 244, 227);
 }
 
-#fav-empty {
+.star-icon {
+    float: right;
     margin-left: auto;
-    margin-right: auto; 
-    display: block;
-    margin-top: -3.5rem;
-    z-index: 2;
-    position: relative;
+    margin-right: 0px; 
+    margin-top: 0.5rem;
+    margin-bottom: -1rem;
+}
+
+@media only screen and (max-width: 450px) {
+
+    #details-image {
+            width: 15rem;
+        }
 }

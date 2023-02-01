@@ -19,8 +19,22 @@
 }
 
 .be-comment-block {
-    padding: 3rem 4rem;
+    padding: 3rem 3rem;
 }
+
+.be-comment-details {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+    justify-content:flex-start;
+    align-items: center;
+    color: rgb(9, 5, 15);
+    border-radius: 10px;
+    margin-bottom: 0.5rem;
+    background: linear-gradient(90deg, rgb(24, 13, 41) 21%, rgb(38, 32, 59) 79%);
+        /* background: linear-gradient(90deg, rgb(73, 13, 77) 21%, rgb(113, 62, 113) 79%); */
+}
+
 
 .be-comment hr {
     color: rgb(224, 224, 53);
@@ -28,24 +42,20 @@
     height: 0.2rem;
     opacity: 70%;
     margin-top: 2rem;
-    
-}
-
-.be-comment-content span {
-    display: inline-block;
-    width: 49%;
-    margin-bottom: 0rem;
-    margin-top: 1rem;
 }
 
 .be-comment-name {
     color: #3dede1;
+    margin-top: 1rem;
 }
 
 .be-comment-time {
-    text-align: right;
-    color: #cbcbcb;
+    color: #ededed;
     font-size: 85%;
+    float: right;
+    margin-left: auto;
+    margin-right: 0.5rem;
+    margin-top: 1rem;
 }
 
 .be-comment-text {
@@ -55,19 +65,18 @@
     align-items: center;
     color: rgb(9, 5, 15);
     background: rgb(247, 219, 242);
-    border: 3px solid rgb(214, 126, 198);
     border-radius: 10px;
+        background: linear-gradient(90deg, rgb(241, 207, 235) 29%, rgb(240, 226, 240) 71%);
 }
 
 .chat-avatar {
     overflow: hidden;
     width: 4rem;
     height: 4rem;
-    border: 2px solid rgb(72, 18, 86);
     border-radius: 10px;
-    margin-bottom: 0.5rem;
-    margin-top: 0.5rem;
-    margin-left: 0.5rem;
+    margin-bottom: 0.3rem;
+    margin-top: 0.3rem;
+    margin-left: 0.3rem;
     margin-right: 1rem;
 }
 
@@ -76,6 +85,7 @@ text-align: justify;
 padding-top: 1rem;
 padding-left: 1rem;
 padding-right: 1rem;
+word-break: break-word;
 }
 
 
@@ -178,4 +188,11 @@ padding-right: 1rem;
 .delete-confirm-button:active {
     background-color: rgb(59, 47, 59) !important;
     border: 3px solid rgb(214, 126, 198) !important;
+}
+
+@media only screen and (max-width: 650px) {
+
+    .be-comment-block {
+            padding: 3rem 2rem;
+        }
 }

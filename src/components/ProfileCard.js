@@ -73,7 +73,7 @@ function ProfileCard() {
   console.log("newImg", newImg);
 
   const changeUserImg = () => {
-    const imageRef = ref(storage, newImg);
+    const imageRef = ref(storage, newImg.name);
     uploadBytes(imageRef, newImg)
       .then(() => {
         getDownloadURL(imageRef)
@@ -114,6 +114,16 @@ function ProfileCard() {
   //     });
   //   });
   // }
+
+  const msgDate = (dateAndTime) => {
+    const date = new Date(dateAndTime).toLocaleDateString();
+    const time = new Date(dateAndTime).toLocaleTimeString();
+    return (
+      <>
+        {date} {time}
+      </>
+    );
+  };
 
   return (
     <>
@@ -163,7 +173,7 @@ function ProfileCard() {
                 </Button>
               </Modal.Footer>
             </Modal>
-
+            <p id="sub-titles">Details</p>
             <span className="detail-line">
               <p id="small-title">Username:</p>
               {isUserName ? (
@@ -214,11 +224,16 @@ function ProfileCard() {
             </span>
             <span className="detail-line">
               <p id="small-title">Registered Since:</p>
-              <p id="small-detail">{user?.metadata?.creationTime}</p>
+              <p id="small-detail">{msgDate(user?.metadata?.creationTime)}</p>
             </span>
             <span className="detail-line">
               <p id="small-title">Last Log In:</p>
-              <p id="small-detail">{user?.metadata?.lastSignInTime}</p>
+              <p id="small-detail">{msgDate(user?.metadata?.lastSignInTime)}</p>
+            </span>
+            <div className="stats"></div>
+            <p id="sub-titles">Favorites</p>
+            <span id="small-parts">
+              <p id="small-titles">hgdsjhgd </p>
             </span>
           </div>
         </Card.Body>
