@@ -16,10 +16,6 @@ function BurgerMenu() {
     }
   }, [user]);
 
-  // function logOut() {
-  //   setUser("");
-  //   redirectTo("/");
-  // }
   function logOut() {
     const auth = getAuth();
     signOut(auth)

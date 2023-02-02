@@ -198,7 +198,7 @@
     margin: 1rem;
     border: 2px solid rgb(230, 142, 55);
     border-radius: 5px;
-    background: linear-gradient(180deg, rgb(9, 5, 15) 29%, rgb(72, 18, 86) 71%);
+    background: linear-gradient(180deg, rgb(0, 0, 1) 29%, rgb(41, 23, 49) 71%);
     transition: transform 300ms;
     max-height: 20rem;
     width: 12rem;

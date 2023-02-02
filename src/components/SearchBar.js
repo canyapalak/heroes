@@ -4,22 +4,9 @@ import { Link } from "react-router-dom";
 import { SearchContext } from "../store/SearchContext";
 
 function SearchBar({}) {
-  const { searchResult, fetchSearchInput } = useContext(SearchContext);
+  const { searchInput, fetchSearchInput } = useContext(SearchContext);
   const [inputValue, setInputValue] = useState("");
-  // const [searchInput, setSearchInput] = useState([]); // let's set this state in the parent component
 
-  // const fetchSearchedHeroes = async () => {
-  //   const response = await fetch(
-  //     `https://www.superheroapi.com/api.php/${apiKey}/search/${searchInput}`
-  //   );
-  //   const result = await response.json();
-  //   console.log("Async result: ", result);
-  //   setSearchedHeroes(result.results);
-  // };
-  //   const submitInput = (e) => {
-  // e.preventDefault()
-  // getInput(e.target.value)
-  //   }
   const handleChange = (e) => {
     setInputValue(e.target.value.toLowerCase());
     console.log("inputValue :>> ", inputValue);

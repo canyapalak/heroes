@@ -58,38 +58,6 @@ function ProfileCard() {
       });
   }
 
-  //set a profile picture
-
-  // const handleImageInput = (e) => {
-  //   if (e.target.files[0]) {
-  //     console.log(" e.target", e);
-  //     setNewImg(e.target.files[0]);
-  //   }
-  // };
-
-  // const changeUserImg = () => {
-  //   const imageRef = ref(storage, newImg.name);
-  //   uploadBytes(imageRef, newImg)
-  //     .then(() => {
-  //       getDownloadURL(imageRef)
-  //         .then((url) => {
-  //           setUrl(url);
-  //           const auth = getAuth();
-  //           updateProfile(auth.currentUser, {
-  //             photoURL: url,
-  //           });
-
-  //           handleCloseModalImg();
-  //         })
-  //         .catch((error) => {
-  //           console.log(error.message, "error getting the image url");
-  //         });
-  //     })
-  //     .catch((error) => {
-  //       console.log(error.message);
-  //     });
-  // };
-
   const msgDate = (dateAndTime) => {
     const date = new Date(dateAndTime).toLocaleDateString();
     const time = new Date(dateAndTime).toLocaleTimeString();
@@ -122,7 +90,6 @@ function ProfileCard() {
     const favRef = doc(db, "favorites", user.uid);
 
     const favSnap = await getDoc(favRef);
-    console.log("favSnap", favSnap);
     const heroesArray =
       favSnap._document.data.value.mapValue.fields.heroes.arrayValue.values;
     console.log("heroesArray :>> ", heroesArray);
@@ -204,7 +171,7 @@ function ProfileCard() {
           <div className="favorites-section">
             {profileFavHeroes.length > 0 ? (
               profileFavHeroes.map((favHero) => (
-                <Link to={favHero.id} key={favHero.id}>
+                <Link to={`/${favHero.id}`} key={favHero.id}>
                   <Card className="fav-card">
                     <Card.Img
                       src={favHero.image.url}
