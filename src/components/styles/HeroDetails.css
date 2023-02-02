@@ -139,6 +139,17 @@
     margin-right: 0px; 
     margin-top: 0.5rem;
     margin-bottom: -1rem;
+    cursor: pointer;
+}
+
+.back-button {
+    float: left;
+    margin-right: auto;
+    margin-left: -0.5rem;
+    margin-top: 0.5rem;
+    margin-bottom: -1rem;
+    cursor: pointer;
+    size: 10%;
 }
 
 @media only screen and (max-width: 450px) {

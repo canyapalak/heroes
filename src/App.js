@@ -9,35 +9,14 @@ import { SearchContextProvider } from "./store/SearchContext";
 import { AuthContextProvider } from "./store/AuthContext";
 import ChatRoom from "./views/ChatRoom";
 import ProtectedRoute from "./routes/ProtectedRoute";
-import { app } from "./config/FirebaseConfig";
 import ProfilePage from "./views/ProfilePage";
 
 function App() {
-  // PREVIOUS FETCH WITH SEARCH ENDPOINT
-
-  // const [heroes, setHeroes] = useState([]);
-  // const fetchHeroes = async () => {
-  //   const response = await fetch(
-  //     `https://www.superheroapi.com/api.php/${apiKey}/search/super`
-  //   );
-  //   const result = await response.json();
-  //   console.log("Async result: ", result);
-  //   setHeroes(result.results);
-  // };
-
-  // FETCH SPECIFIC HEROES WITH PROMISE.ALL
-
   const [defaultHeroes, setDefaultHeroes] = useState([]);
   const ids = [70, 620, 644, 332, 157, 263];
   useEffect(() => {
     // Promise.all([
-    //   fetch(`https://www.superheroapi.com/api.php/${apiKey}/70`),
-    //   fetch(`https://www.superheroapi.com/api.php/${apiKey}/620`),
-    //   fetch(`https://www.superheroapi.com/api.php/${apiKey}/644`),
-    //   fetch(`https://www.superheroapi.com/api.php/${apiKey}/332`),
-    //   fetch(`https://www.superheroapi.com/api.php/${apiKey}/720`),
-    //   fetch(`https://www.superheroapi.com/api.php/${apiKey}/659`),
-    // ])
+
     Promise.all(
       ids.map((id) => {
         return fetch(
@@ -46,25 +25,8 @@ function App() {
       })
     ).then((result) => {
       setDefaultHeroes(result);
+      console.log("defaultHeroes :>> ", defaultHeroes);
     });
-
-    // console.log("app :>> ", app);
-
-    // .then(function (responses) {
-    //   console.log("responses :>> ", responses);
-    //   return Promise.all(
-    //     responses.map(function (response) {
-    //       return response.json();
-    //     })
-    //   );
-    // })
-    // .then(function (defaultHeroes) {
-    //   console.log("Default Heroes: ", defaultHeroes);
-    //   setDefaultHeroes(defaultHeroes);
-    // })
-    // .catch(function (error) {
-    //   console.log("error :", error);
-    // });
   }, []);
 
   return (
@@ -78,6 +40,7 @@ function App() {
               element={
                 <ProtectedRoute>
                   <DetailsPage />
+                  <ProfilePage />
                 </ProtectedRoute>
               }
             />

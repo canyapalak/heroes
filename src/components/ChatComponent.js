@@ -169,7 +169,7 @@ function ChatComponent() {
                   <div className="be-comment-text">
                     <p id="message-text">{message.text}</p>
                   </div>
-                  {message.userid === user.uid && (
+                  {message.userid === user?.uid && (
                     <div className="pencil-and-trash">
                       <img
                         src={pencil}

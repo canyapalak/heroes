@@ -3,10 +3,8 @@ import { getAuth, updateProfile } from "firebase/auth";
 import { storage } from "../config/FirebaseConfig.js";
 import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
 import { Button, Modal } from "react-bootstrap";
-import Card from "react-bootstrap/Card";
 import { AuthContext } from "../store/AuthContext";
 import avatarPlaceholder from "./assets/avatar-placeholder.png";
-import { useEffect } from "react";
 
 function ProfileImage() {
   const { user } = useContext(AuthContext);

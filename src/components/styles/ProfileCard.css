@@ -182,14 +182,63 @@
 
 #upload-image {
     display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 25rem;
+    height: 2.5rem;
+    border: 3px solid rgb(214, 126, 198);
+    border-radius: 7px;
+    letter-spacing: 1px;
+    font-size: 1.3rem;
+    padding-bottom: 2rem;
+    padding-top: -1rem;
+}
+
+.fav-card {
+    margin: 1rem;
+    border: 2px solid rgb(230, 142, 55);
+    border-radius: 5px;
+    background: linear-gradient(180deg, rgb(9, 5, 15) 29%, rgb(72, 18, 86) 71%);
+    transition: transform 300ms;
+    max-height: 20rem;
+    width: 12rem;
+}
+
+.fav-card:hover {
+    transform: scale(1.07);
+
+}
+
+#fav-name {
+    display: flex;
+    text-align: center;
+    justify-content: center;
+    font-size: 120%;
+    color: rgb(224, 224, 53);
+
+}
+
+#fav-img {
+        border-radius: 5px;
         margin-left: auto;
         margin-right: auto;
-        width: 25rem;
-        height: 2.5rem;
-        border: 3px solid rgb(214, 126, 198);
-        border-radius: 7px;
-        letter-spacing: 1px;
-        font-size: 1.3rem;
-        padding-bottom: 2rem;
-        padding-top: -1rem;
+        margin-top: 1rem;
+        max-height: 13rem;
+        min-height: 13rem;
+        min-width: 10rem;
+        max-width: 10rem;
+}
+
+.no-favs-found {
+    font-size: x-large;
+    color: white;
+    margin: 1rem;
+    text-align: center;
+}
+
+.favorites-section {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
 }

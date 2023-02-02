@@ -9,7 +9,7 @@ function ProtectedRoute({ children }) {
   return (
     <>
       {loader ? (
-        <p>....loading...</p>
+        <p>....Loading...</p>
       ) : user ? (
         children
       ) : (

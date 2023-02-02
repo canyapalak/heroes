@@ -6,11 +6,9 @@ import { AuthContext } from "../store/AuthContext";
 function NavigationBar() {
   const { user } = useContext(AuthContext);
 
-  // useEffect(() => {
-  //   console.log("user changed", user);
-  // }, [{ user }]);
-
-  // console.log("user.displayName", user.displayName);
+  useEffect(() => {
+    console.log("user changed", user);
+  }, [user]);
 
   return (
     <div className="navbar">

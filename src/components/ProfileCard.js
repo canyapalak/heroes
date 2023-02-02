@@ -1,13 +1,15 @@
 import React, { useContext, useState } from "react";
 import { getAuth, updateProfile } from "firebase/auth";
-import { storage } from "../config/FirebaseConfig.js";
+import { db, storage } from "../config/FirebaseConfig.js";
 import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
 import { Button, Modal } from "react-bootstrap";
 import Card from "react-bootstrap/Card";
 import { AuthContext } from "../store/AuthContext";
-import avatarPlaceholder from "./assets/avatar-placeholder.png";
+import HeroPlaceholder from "./assets/hero-placeholder.jpg";
 import { useEffect } from "react";
 import ProfileImage from "./ProfileImage";
+import { doc, getDoc } from "firebase/firestore";
+import { Link } from "react-router-dom";
 
 function ProfileCard() {
   const { user } = useContext(AuthContext);
@@ -94,6 +96,39 @@ function ProfileCard() {
     );
   };
 
+  //calling favorites
+
+  const sampleArray = [414, 13, 179, 535, 167];
+  const [profileFavHeroes, setProfileFavHeroes] = useState([]);
+
+  useEffect(() => {
+    Promise.all(
+      sampleArray.map((id) => {
+        return fetch(
+          `https://www.superheroapi.com/api.php/${process.env.REACT_APP_APIKEY}/${id}`
+        ).then((response) => response.json());
+      })
+    ).then((result) => {
+      setProfileFavHeroes(result);
+    });
+  }, []);
+
+  // const getHeroesArray = async () => {
+  //   const favRef = doc(db, "favorites", user.uid);
+
+  //   const favSnap = await getDoc(favRef);
+  //   console.log("favSnap", favSnap);
+  //   const heroesArray =
+  //     favSnap._document.data.value.mapValue.fields.heroes.arrayValue.values;
+  //   console.log("heroesArray :>> ", heroesArray);
+  // };
+
+  // getHeroesArray();
+
+  const onImageError = (e) => {
+    e.target.src = HeroPlaceholder;
+  };
+
   return (
     <>
       <Card className="profile-card">
@@ -162,9 +197,29 @@ function ProfileCard() {
             </span>
             <div className="stats"></div>
             <p id="sub-titles">Favorites</p>
-            <span id="small-parts">
-              <p id="small-titles">hgdsjhgd </p>
-            </span>
+          </div>
+          <div className="favorites-section">
+            {profileFavHeroes.length > 0 ? (
+              profileFavHeroes.map((favHero) => (
+                <Link to={favHero.id} key={favHero.id}>
+                  <Card className="fav-card">
+                    <Card.Img
+                      src={favHero.image.url}
+                      id="fav-img"
+                      onError={onImageError}
+                      alt={favHero.name}
+                    />
+                    <Card.Body>
+                      <Card.Title id="fav-name">{favHero.name}</Card.Title>
+                    </Card.Body>
+                  </Card>
+                </Link>
+              ))
+            ) : (
+              <div className="no-favs-found">
+                <p>You have no favorite heroes.</p>
+              </div>
+            )}
           </div>
         </Card.Body>
       </Card>

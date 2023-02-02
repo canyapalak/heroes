@@ -13,15 +13,16 @@ import {
   arrayUnion,
   arrayRemove,
 } from "firebase/firestore";
-import { useParams } from "react-router-dom";
+import { Navigate, useNavigate, useParams } from "react-router-dom";
 import React, { useState, useEffect } from "react";
 import Card from "react-bootstrap/Card";
-import IconEmpty from "./assets/icon-empty.png";
-import IconFull from "./assets/icon-full.png";
 import { AuthContext } from "../store/AuthContext";
 import { useContext } from "react";
 import { db } from "../config/FirebaseConfig";
 import HeroPlaceholder from "./assets/hero-placeholder.jpg";
+import IconEmpty from "./assets/icon-empty.png";
+import IconFull from "./assets/icon-full.png";
+import BackButton from "./assets/back-button.png";
 
 function HeroDetails() {
   const { user } = useContext(AuthContext);
@@ -127,17 +128,24 @@ function HeroDetails() {
     }
   }
 
+  const navigate = useNavigate();
+
   return (
     <div className="details-container">
       {oneHero ? (
         <>
           <Card className="details-card">
-            <div onClick={setToggle} className="star-icon">
-              {!isToggled ? (
-                <img src={IconEmpty} alt="Not Favorite" />
-              ) : (
-                <img src={IconFull} alt="Favorite" />
-              )}
+            <div className="back-and-star">
+              <div className="back-button">
+                <img src={BackButton} alt="Back" onClick={() => navigate(-1)} />
+              </div>
+              <div onClick={setToggle} className="star-icon">
+                {!isToggled ? (
+                  <img src={IconEmpty} alt="Not Favorite" />
+                ) : (
+                  <img src={IconFull} alt="Favorite" />
+                )}
+              </div>
             </div>
             <Card.Title id="details-title">
               <p id="details-name">{oneHero.name}</p>
