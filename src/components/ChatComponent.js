@@ -265,7 +265,7 @@ function ChatComponent() {
               >
                 Submit
               </Button>
-              {isLoggedIn ? (
+              {user ? (
                 <div className="you-are-not-logged-in">
                   <p>
                     <br></br>

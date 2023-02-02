@@ -11,7 +11,6 @@ export const AuthContext = createContext();
 
 //create the store
 export const AuthContextProvider = (props) => {
-  console.log("context run>>>");
   const [user, setUser] = useState("");
   const [loader, setLoader] = useState(true);
   const [error, setError] = useState({});
@@ -21,7 +20,6 @@ export const AuthContextProvider = (props) => {
 
   //firebase sign up
   const register = async (email, password) => {
-    console.log("email, password :>> ", email, password);
     try {
       const userCredential = await createUserWithEmailAndPassword(
         auth,
@@ -72,7 +70,6 @@ export const AuthContextProvider = (props) => {
   }, []);
 
   const currentUser = () => {
-    console.log("currentUser run");
     onAuthStateChanged(auth, (user) => {
       if (user) {
         // User is signed in, see docs for a list of available properties
@@ -80,7 +77,7 @@ export const AuthContextProvider = (props) => {
         const uid = user.uid;
         setUser(user);
         setLoader(false);
-        console.log("currentUser >>>", user);
+        // console.log("currentUser >>>", user);
       } else {
         setUser(null);
         setLoader(false);
