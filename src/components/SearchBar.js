@@ -4,7 +4,8 @@ import { Link } from "react-router-dom";
 import { SearchContext } from "../store/SearchContext";
 
 function SearchBar({}) {
-  const { searchInput, fetchSearchInput } = useContext(SearchContext);
+  const { searchInput, fetchSearchInput, searchDispatch } =
+    useContext(SearchContext);
   const [inputValue, setInputValue] = useState("");
 
   const handleChange = (e) => {
@@ -21,8 +22,6 @@ function SearchBar({}) {
       fetchSearchInput(inputValue);
     }
   };
-
-  const { searchDispatch } = useContext(SearchContext);
 
   const handleHomeClick = () => {
     searchDispatch({ type: "reset" });
