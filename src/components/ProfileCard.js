@@ -24,6 +24,10 @@ function ProfileCard() {
     checkUsername();
   }, [isUserName]);
 
+  const onImageError = (e) => {
+    e.target.src = HeroPlaceholder;
+  };
+
   const checkUsername = () => {
     if (user.displayName) {
       setIsUsername(true);
@@ -56,35 +60,35 @@ function ProfileCard() {
 
   //set a profile picture
 
-  const handleImageInput = (e) => {
-    if (e.target.files[0]) {
-      console.log(" e.target", e);
-      setNewImg(e.target.files[0]);
-    }
-  };
+  // const handleImageInput = (e) => {
+  //   if (e.target.files[0]) {
+  //     console.log(" e.target", e);
+  //     setNewImg(e.target.files[0]);
+  //   }
+  // };
 
-  const changeUserImg = () => {
-    const imageRef = ref(storage, newImg.name);
-    uploadBytes(imageRef, newImg)
-      .then(() => {
-        getDownloadURL(imageRef)
-          .then((url) => {
-            setUrl(url);
-            const auth = getAuth();
-            updateProfile(auth.currentUser, {
-              photoURL: url,
-            });
+  // const changeUserImg = () => {
+  //   const imageRef = ref(storage, newImg.name);
+  //   uploadBytes(imageRef, newImg)
+  //     .then(() => {
+  //       getDownloadURL(imageRef)
+  //         .then((url) => {
+  //           setUrl(url);
+  //           const auth = getAuth();
+  //           updateProfile(auth.currentUser, {
+  //             photoURL: url,
+  //           });
 
-            handleCloseModalImg();
-          })
-          .catch((error) => {
-            console.log(error.message, "error getting the image url");
-          });
-      })
-      .catch((error) => {
-        console.log(error.message);
-      });
-  };
+  //           handleCloseModalImg();
+  //         })
+  //         .catch((error) => {
+  //           console.log(error.message, "error getting the image url");
+  //         });
+  //     })
+  //     .catch((error) => {
+  //       console.log(error.message);
+  //     });
+  // };
 
   const msgDate = (dateAndTime) => {
     const date = new Date(dateAndTime).toLocaleDateString();
@@ -98,35 +102,34 @@ function ProfileCard() {
 
   //calling favorites
 
-  const sampleArray = [414, 13, 179, 535, 167];
   const [profileFavHeroes, setProfileFavHeroes] = useState([]);
 
   useEffect(() => {
-    Promise.all(
-      sampleArray.map((id) => {
-        return fetch(
-          `https://www.superheroapi.com/api.php/${process.env.REACT_APP_APIKEY}/${id}`
-        ).then((response) => response.json());
-      })
-    ).then((result) => {
-      setProfileFavHeroes(result);
+    getHeroesArray().then((heroesArray) => {
+      Promise.all(
+        heroesArray.map((id) => {
+          return fetch(
+            `https://www.superheroapi.com/api.php/${process.env.REACT_APP_APIKEY}/${id}`
+          ).then((response) => response.json());
+        })
+      ).then((result) => {
+        setProfileFavHeroes(result);
+      });
     });
   }, []);
 
-  // const getHeroesArray = async () => {
-  //   const favRef = doc(db, "favorites", user.uid);
+  const getHeroesArray = async () => {
+    const favRef = doc(db, "favorites", user.uid);
 
-  //   const favSnap = await getDoc(favRef);
-  //   console.log("favSnap", favSnap);
-  //   const heroesArray =
-  //     favSnap._document.data.value.mapValue.fields.heroes.arrayValue.values;
-  //   console.log("heroesArray :>> ", heroesArray);
-  // };
+    const favSnap = await getDoc(favRef);
+    console.log("favSnap", favSnap);
+    const heroesArray =
+      favSnap._document.data.value.mapValue.fields.heroes.arrayValue.values;
+    console.log("heroesArray :>> ", heroesArray);
 
-  // getHeroesArray();
-
-  const onImageError = (e) => {
-    e.target.src = HeroPlaceholder;
+    if (heroesArray.length > 0) {
+      return heroesArray.map((item) => item.stringValue);
+    }
   };
 
   return (
