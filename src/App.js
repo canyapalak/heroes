@@ -25,7 +25,6 @@ function App() {
       })
     ).then((result) => {
       setDefaultHeroes(result);
-      console.log("defaultHeroes :>> ", defaultHeroes);
     });
   }, []);
 
