@@ -92,7 +92,6 @@ function ProfileCard() {
     const favSnap = await getDoc(favRef);
     const heroesArray =
       favSnap._document.data.value.mapValue.fields.heroes.arrayValue.values;
-    console.log("heroesArray :>> ", heroesArray);
 
     if (heroesArray.length > 0) {
       return heroesArray.map((item) => item.stringValue);

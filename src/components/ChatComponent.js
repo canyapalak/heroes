@@ -61,7 +61,6 @@ function ChatComponent() {
           ...doc.data(),
         };
         msgs.push(msgObj);
-        console.log("msgs :>> ", msgs);
       });
       setMessages(msgs);
     });

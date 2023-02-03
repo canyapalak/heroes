@@ -57,7 +57,6 @@ function HeroDetails() {
     const favRef = doc(db, "favorites", user.uid);
 
     const favSnap = await getDoc(favRef);
-    console.log("favSnap", favSnap);
     const heroesArray =
       favSnap._document.data.value.mapValue.fields.heroes.arrayValue.values;
 
@@ -120,9 +119,7 @@ function HeroDetails() {
               console.log("error :>> ", e);
             }
           }
-        } catch (error) {
-          console.log("error :>> ", e);
-        }
+        } catch (error) {}
       };
       removeFav();
     }

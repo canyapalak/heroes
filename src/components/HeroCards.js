@@ -16,7 +16,6 @@ function HeroCards({ defaultHeroes }) {
   const [heroes, setHeroes] = useState([]);
 
   useEffect(() => {
-    console.log("searchResult :>> ", searchResult);
     if (
       searchResult &&
       searchResult.results &&
@@ -28,16 +27,12 @@ function HeroCards({ defaultHeroes }) {
 
       console.log("backToSearchResults :>> ", backToSearchResults);
     } else {
-      console.log(defaultHeroes);
-      console.log(searchResult);
+      // console.log(defaultHeroes);
+      // console.log(searchResult);
       setHeroes(defaultHeroes);
       backToSearchResults.current = defaultHeroes;
     }
   }, [searchResult, defaultHeroes]);
-
-  // useEffect(() => {
-  //   setHeroes(defaultHeroes);
-  // }, [defaultHeroes]);
 
   return (
     <div className="heroes-and-search">
