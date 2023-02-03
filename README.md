@@ -1,4 +1,4 @@
-Live Preview: heroes-database.netlify.app
+Live Preview: https://heroes-database.netlify.app
 
 # Getting Started with Create React App
 
