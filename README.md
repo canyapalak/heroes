@@ -2,7 +2,7 @@
 
 <h2>A website about superhero details, built with React and Firebase</h2>
 
-<h2>Functinality and purpose of the application</h2>
+<h2>Functionality and purpose of the application</h2>
 <p>
 Heroes app provides comprehensive details about over 700 different superheroes from different universes. It was built using the superheroapi.com API and was created with React, Firebase, and Bootstrap.
 
