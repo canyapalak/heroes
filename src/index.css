@@ -1,4 +1,12 @@
 
+/* Font */
+@font-face {
+  font-family: 'HortaRegular';
+  src: url('./components/assets/Horta_demo.otf') format('opentype');
+  font-weight: normal;
+  font-style: normal;
+}
+
 /* Body */
 body {
   margin: 0px !important;
